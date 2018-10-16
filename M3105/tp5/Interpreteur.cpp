@@ -141,6 +141,21 @@ Noeud* Interpreteur::instSiRiche() {
     //<instSiRiche> ::= si(<expression>)<seqInst> {sinon si(<expression>)<seqInst> }[sinon<seqInst>]finsi
     testerEtAvancer("si");
     testerEtAvancer("(");
-    Noeud* condition = expression
+    Noeud* condition = expression();
+    testerEtAvancer(")");
+    Noeud* sequence = seqInst();
+    while(m_lecteur.getSymbole() == "sinonsi"){
+        testerEtAvancer("sinonsi");
+        testerEtAvancer("(");
+        Noeud* condition = expression();
+        testerEtAvancer(")");
+        Noeud* sequence = seqInst();
+    }
+    if(m_lecteur.getSymbole() == "sinon"){
+        testerEtAvancer("sinon");        
+    }
+    testerEtAvancer("finsi");
+    return nullptr;
+    
 }
 
