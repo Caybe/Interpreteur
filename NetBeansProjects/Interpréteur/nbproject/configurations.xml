@@ -16,7 +16,6 @@
                    displayName="Resource Files"
                    projectFiles="true">
       <itemPath>../../M3105/tp5/motsCles.txt</itemPath>
-      <itemPath>../../M3105/tp5/programme.txt</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -39,7 +38,7 @@
                    projectFiles="false"
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
-      <itemPath>../../M3105/tp5/programme.txt</itemPath>
+      <itemPath>programme.txt</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
@@ -87,8 +86,6 @@
       <item path="../../M3105/tp5/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../../M3105/tp5/motsCles.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="../../M3105/tp5/programme.txt" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -141,8 +138,6 @@
       <item path="../../M3105/tp5/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../../M3105/tp5/motsCles.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="../../M3105/tp5/programme.txt" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>
