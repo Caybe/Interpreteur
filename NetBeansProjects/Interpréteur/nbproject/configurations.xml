@@ -39,6 +39,7 @@
                    projectFiles="false"
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
+      <itemPath>../../M3105/tp5/programme.txt</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
