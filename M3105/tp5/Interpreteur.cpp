@@ -139,5 +139,8 @@ Noeud* Interpreteur::instSi() {
 
 Noeud* Interpreteur::instSiRiche() {
     //<instSiRiche> ::= si(<expression>)<seqInst> {sinon si(<expression>)<seqInst> }[sinon<seqInst>]finsi
+    testerEtAvancer("si");
+    testerEtAvancer("(");
+    Noeud* condition = expression
 }
 

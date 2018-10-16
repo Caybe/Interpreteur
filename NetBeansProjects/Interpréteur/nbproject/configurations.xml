@@ -4,15 +4,13 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <logicalFolder name="tp5" displayName="tp5" projectFiles="true">
-        <itemPath>../../M3105/tp5/ArbreAbstrait.h</itemPath>
-        <itemPath>../../M3105/tp5/Exceptions.h</itemPath>
-        <itemPath>../../M3105/tp5/Interpreteur.h</itemPath>
-        <itemPath>../../M3105/tp5/Lecteur.h</itemPath>
-        <itemPath>../../M3105/tp5/Symbole.h</itemPath>
-        <itemPath>../../M3105/tp5/SymboleValue.h</itemPath>
-        <itemPath>../../M3105/tp5/TableSymboles.h</itemPath>
-      </logicalFolder>
+      <itemPath>../../M3105/tp5/ArbreAbstrait.h</itemPath>
+      <itemPath>../../M3105/tp5/Exceptions.h</itemPath>
+      <itemPath>../../M3105/tp5/Interpreteur.h</itemPath>
+      <itemPath>../../M3105/tp5/Lecteur.h</itemPath>
+      <itemPath>../../M3105/tp5/Symbole.h</itemPath>
+      <itemPath>../../M3105/tp5/SymboleValue.h</itemPath>
+      <itemPath>../../M3105/tp5/TableSymboles.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
