@@ -36,10 +36,10 @@ private:
     Noeud*  instSi();      //      <instSi> ::= si ( <expression> ) <seqInst> finsi
     Noeud*  instSiRiche(); //<instSiRiche> ::= si(<expression>)<seqInst> {sinon si(<expression>)<seqInst> }[sinon<seqInst>]finsi
     Noeud*  instTantQue(); // <instTantQue> ::=tantque(<expression> )<seqInst> fintantque
-    Noeud*  instPour(); //<instPour> ::= pour([<affectation>];<expression>;[<affectation>])< seqInst> finpour
-    Noeud*  instEcrire(); //<instEcrire>  ::= ecrire(<expression> |<chaine> {,<expression> | <chaine> })
-    Noeud*  instLire(); //<instLire> ::=lire( <variable> {,<variable> })
-    
+    Noeud*  instRepeter(); //<instRepeter> ::=repeter<seqInst> jusqua(<expression> )
+    Noeud*  instPour();    //<instPour>    :: pour([<affectation>];<expression>;[<affectation>] )   < seqInst>           finpour
+    Noeud*  instEcrire();   //<instEcrire> :=ecrire(<expression> |<chaine> {,<expression> | <chaine> })
+    Noeud*  instLire();
     // outils pour simplifier l'analyse syntaxique
     void tester (const string & symboleAttendu) const throw (SyntaxeException);   // Si symbole courant != symboleAttendu, on lève une exception
     void testerEtAvancer(const string & symboleAttendu) throw (SyntaxeException); // Si symbole courant != symboleAttendu, on lève une exception, sinon on avance

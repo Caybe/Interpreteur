@@ -1,34 +1,18 @@
 # Fichier de test
 # Les lignes de commentaires commencent par #
 procedure principale()
-  i = 12+3;
-  si (i>14)
-    j=1;
-  finsi
-  tantque ( i < 20)
-   i = i+1;
-  fintantque
-
-# Commentaire Final
+i = 15;
 
 #test InstSiRiche
-si (j>10)
+si (i==10)
     j= 20;
-sinonsi (j<10)
+sinonsi (i<10)
     j=30;
-sinonsi(j>20)
+sinonsi(i>20)
     j=40;
 sinon
     j=50;
 finsi
 
-
-#test Pour
-x = 0;
-k = 0;
-pour(; k < 10;)
-    k=k+1;
-    x = x+1;
-finpour
 
 finproc
