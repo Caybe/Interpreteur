@@ -1,0 +1,6 @@
+#test de ecrire
+procedure principale()
+k = 10;
+x = 2;
+ecrire("Bonjour","Salut",chaine, k+x)
+finproc

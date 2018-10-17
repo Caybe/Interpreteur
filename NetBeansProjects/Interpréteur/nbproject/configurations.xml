@@ -39,6 +39,8 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
       <itemPath>programme.txt</itemPath>
+      <itemPath>testEcrire.txt</itemPath>
+      <itemPath>testLire.txt</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>

@@ -57,14 +57,14 @@ Noeud* Interpreteur::seqInst() {
     NoeudSeqInst* sequence = new NoeudSeqInst();
     do {
         sequence->ajoute(inst());
-    } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si" || m_lecteur.getSymbole() == "tantque" || m_lecteur.getSymbole() == "repeter" || m_lecteur.getSymbole() == "pour");
+    } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si" || m_lecteur.getSymbole() == "tantque" || m_lecteur.getSymbole() == "repeter" || m_lecteur.getSymbole() == "pour" || m_lecteur.getSymbole() == "ecrire" || m_lecteur.getSymbole() == "lire");
     // Tant que le symbole courant est un début possible d'instruction...
     // Il faut compléter cette condition chaque fois qu'on rajoute une nouvelle instruction
     return sequence;
 }
 
 Noeud* Interpreteur::inst() {
-    // <inst> ::= <affectation>  ; | <instSiRiche> | <instTantQue> | <instPour>
+    // <inst> ::= <affectation>  ; | <instSiRiche> | <instTantQue> | <instPour> | <ecrire>
     if (m_lecteur.getSymbole() == "<VARIABLE>") {
         Noeud *affect = affectation();
         testerEtAvancer(";");
@@ -77,6 +77,10 @@ Noeud* Interpreteur::inst() {
         return instPour();
     else if (m_lecteur.getSymbole() == "repeter")
         return instRepeter();
+    else if (m_lecteur.getSymbole() == "lire")
+        return instLire();
+        else if (m_lecteur.getSymbole() == "ecrire")
+        return instEcrire();
         // Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
     else erreur("Instruction incorrecte");
 }
@@ -163,7 +167,6 @@ Noeud* Interpreteur::instSiRiche() {
 
     if (m_lecteur.getSymbole() == "sinon") {
         testerEtAvancer("sinon");
-        noeud->ajouterSinon(seqInst());
     }
     testerEtAvancer("finsi");
     
@@ -209,7 +212,49 @@ Noeud* Interpreteur::instPour() {
     Noeud* sequence = seqInst();
     testerEtAvancer("finpour");
 
+        Noeud* sequence = seqInst();
     return nullptr;
 }
 
 
+
+Noeud* Interpreteur::instEcrire() {
+    //<instEcrire>  ::= ecrire(<expression> |<chaine> {,<expression> | <chaine> })
+    testerEtAvancer("ecrire");
+    testerEtAvancer("(");
+
+    if (m_lecteur.getSymbole() == "<CHAINE>") {
+        testerEtAvancer("<CHAINE>");
+    } else {
+        Noeud* condition = expression();
+    }
+
+    while (m_lecteur.getSymbole() != ")") {
+        testerEtAvancer(",");
+        if (m_lecteur.getSymbole() == "<CHAINE>") {
+            testerEtAvancer("<CHAINE>");
+        } else {
+            Noeud* condition = expression();
+        }
+    }
+    testerEtAvancer(")");
+    
+    return nullptr;
+}
+
+Noeud* Interpreteur::instLire() {
+    //<instLire> ::=lire( <variable> {,<variable> })
+    testerEtAvancer("lire");
+    testerEtAvancer("(");
+    if (m_lecteur.getSymbole() == "<VARIABLE>"){
+        testerEtAvancer("<VARIABLE>");
+    }
+    while (m_lecteur.getSymbole() != ")") {
+        testerEtAvancer(",");
+       if (m_lecteur.getSymbole() == "<VARIABLE>"){
+        testerEtAvancer("<VARIABLE>");
+       } 
+    }
+    testerEtAvancer(")");
+    return nullptr;
+}
