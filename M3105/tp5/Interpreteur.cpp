@@ -57,14 +57,14 @@ Noeud* Interpreteur::seqInst() {
     NoeudSeqInst* sequence = new NoeudSeqInst();
     do {
         sequence->ajoute(inst());
-    } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si" || m_lecteur.getSymbole() == "tantque" || m_lecteur.getSymbole() == "repeter");
+    } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si" || m_lecteur.getSymbole() == "tantque" || m_lecteur.getSymbole() == "repeter" || m_lecteur.getSymbole() == "pour");
     // Tant que le symbole courant est un début possible d'instruction...
     // Il faut compléter cette condition chaque fois qu'on rajoute une nouvelle instruction
     return sequence;
 }
 
 Noeud* Interpreteur::inst() {
-    // <inst> ::= <affectation>  ; | <instSiRiche> | <instTantQue>
+    // <inst> ::= <affectation>  ; | <instSiRiche> | <instTantQue> | <instPour>
     if (m_lecteur.getSymbole() == "<VARIABLE>") {
         Noeud *affect = affectation();
         testerEtAvancer(";");
@@ -73,6 +73,8 @@ Noeud* Interpreteur::inst() {
         return instSiRiche();
     else if (m_lecteur.getSymbole() == "tantque")
         return instTantQue();
+    else if (m_lecteur.getSymbole() == "pour")
+        return instPour();
     else if (m_lecteur.getSymbole() == "repeter")
         return instRepeter();
         // Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
@@ -82,7 +84,7 @@ Noeud* Interpreteur::inst() {
 Noeud* Interpreteur::affectation() {
     // <affectation> ::= <variable> = <expression> 
     tester("<VARIABLE>");
-    Noeud* var = m_table.chercheAjoute(m_lecteur.getSymbole()); // La variable est ajoutée à la table eton la mémorise
+    Noeud* var = m_table.chercheAjoute(m_lecteur.getSymbole()); // La variable est ajoutée à la table et on la mémorise
     m_lecteur.avancer();
     testerEtAvancer("=");
     Noeud* exp = expression(); // On mémorise l'expression trouvée
@@ -143,30 +145,29 @@ Noeud* Interpreteur::facteur() {
 
 Noeud* Interpreteur::instSiRiche() {
     //<instSiRiche> ::= si(<expression>)<seqInst> {sinon si(<expression>)<seqInst> }[sinon<seqInst>]finsi
-    vector<Noeud*> conditions;
-    vector<Noeud*> sequences;
+    NoeudInstSiRiche* noeud = new NoeudInstSiRiche();
     testerEtAvancer("si");
     testerEtAvancer("(");
-    conditions.push_back(expression());
+    noeud->ajouterCond(expression());
     testerEtAvancer(")");
-    sequences.push_back(seqInst());
+    noeud->ajouterSeq(seqInst());
 
     while (m_lecteur.getSymbole() == "sinonsi") {
         testerEtAvancer("sinonsi");
         testerEtAvancer("(");
-        conditions.push_back(expression());
+        noeud->ajouterCond(expression());
         testerEtAvancer(")");
-        sequences.push_back(seqInst());
+        noeud->ajouterSeq(seqInst());
     }
 
 
     if (m_lecteur.getSymbole() == "sinon") {
         testerEtAvancer("sinon");
-        sequences.push_back(seqInst());
+        noeud->ajouterSinon(seqInst());
     }
     testerEtAvancer("finsi");
-
-    return nullptr;
+    
+    return noeud;
 }
 
 Noeud* Interpreteur::instTantQue() {
@@ -189,11 +190,26 @@ Noeud * Interpreteur::instRepeter() {
     return nullptr;
 }
 
-//Noeud* Interpreteur::instEcrire(){
-//    testerEtAvancer("ecrire");
-//    do{
-//        
-//    }while(tester(""))
-//    return nullptr;
-//}
+Noeud* Interpreteur::instPour() {
+    //<instPour>::= pour([<affectation>];<expression>;[<affectation>])< seqInst> finpour
+    testerEtAvancer("pour");
+    testerEtAvancer("(");
+    if (m_lecteur.getSymbole() != ";") {
+        Noeud* condition = affectation();
+    }
+    testerEtAvancer(";");
+    Noeud* condition = expression();
+    testerEtAvancer(";");
+
+    if (m_lecteur.getSymbole() != ")") {
+        Noeud* condition = affectation();
+    }
+
+    testerEtAvancer(")");
+    Noeud* sequence = seqInst();
+    testerEtAvancer("finpour");
+
+    return nullptr;
+}
+
 

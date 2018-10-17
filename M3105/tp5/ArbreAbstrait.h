@@ -71,14 +71,17 @@ class NoeudInstSiRiche : public Noeud {
 // Classe pour représenter un noeud "instruction si"
 //  et ses 2 fils : la condition du si et la séquence d'instruction associée
   public:
-    NoeudInstSiRiche(vector<Noeud*> conditions, vector<Noeud*> sequences);
+    NoeudInstSiRiche();
      // Construit une "instruction si" avec sa condition et sa séquence d'instruction
    ~NoeudInstSiRiche() {} // A cause du destructeur virtuel de la classe Noeud
     int executer();  // Exécute l'instruction si : si condition vraie on exécute la séquence
-
+    void ajouterCond(Noeud* condition);
+    void ajouterSeq(Noeud* sequence);
+    void ajouterSinon(Noeud* sequence);
   private:
     vector<Noeud*>  m_conditions;
     vector<Noeud*>  m_sequences;
+    Noeud* m_sinon;
 };
 
 #endif /* ARBREABSTRAIT_H */
