@@ -8,7 +8,7 @@ procedure principale()
   tantque ( i < 20)
    i = i+1;
   fintantque
-finproc
+
 # Commentaire Final
 
 #test InstSiRiche
@@ -21,4 +21,14 @@ sinonsi(j>20)
 sinon
     j=50;
 finsi
+
+
+#test Pour
+x = 0;
+k = 0;
+pour(; k < 10;)
+    k=k+1;
+    x = x+1;
+finpour
+
 finproc

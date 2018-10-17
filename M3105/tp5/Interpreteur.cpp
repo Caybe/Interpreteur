@@ -57,14 +57,14 @@ Noeud* Interpreteur::seqInst() {
     NoeudSeqInst* sequence = new NoeudSeqInst();
     do {
         sequence->ajoute(inst());
-    } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si" || m_lecteur.getSymbole() == "tantque");
+    } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si" || m_lecteur.getSymbole() == "tantque" || m_lecteur.getSymbole() == "pour");
     // Tant que le symbole courant est un début possible d'instruction...
     // Il faut compléter cette condition chaque fois qu'on rajoute une nouvelle instruction
     return sequence;
 }
 
 Noeud* Interpreteur::inst() {
-    // <inst> ::= <affectation>  ; | <instSiRiche> | <instTantQue>
+    // <inst> ::= <affectation>  ; | <instSiRiche> | <instTantQue> | <instPour>
     if (m_lecteur.getSymbole() == "<VARIABLE>") {
         Noeud *affect = affectation();
         testerEtAvancer(";");
@@ -73,6 +73,8 @@ Noeud* Interpreteur::inst() {
         return instSiRiche();
     else if (m_lecteur.getSymbole() == "tantque")
         return instTantQue();
+    else if(m_lecteur.getSymbole() == "pour")
+        return instPour();
         // Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
     else erreur("Instruction incorrecte");
 }
@@ -80,7 +82,7 @@ Noeud* Interpreteur::inst() {
 Noeud* Interpreteur::affectation() {
     // <affectation> ::= <variable> = <expression> 
     tester("<VARIABLE>");
-    Noeud* var = m_table.chercheAjoute(m_lecteur.getSymbole()); // La variable est ajoutée à la table eton la mémorise
+    Noeud* var = m_table.chercheAjoute(m_lecteur.getSymbole()); // La variable est ajoutée à la table et on la mémorise
     m_lecteur.avancer();
     testerEtAvancer("=");
     Noeud* exp = expression(); // On mémorise l'expression trouvée
@@ -175,3 +177,24 @@ Noeud* Interpreteur::instTantQue() {
     return nullptr;
 }
 
+Noeud* Interpreteur::instPour() {
+    //<instPour>::= pour([<affectation>];<expression>;[<affectation>])< seqInst> finpour
+    testerEtAvancer("pour");
+    testerEtAvancer("(");
+    if(m_lecteur.getSymbole() != ";"){        
+        Noeud* condition = affectation();
+    }
+    testerEtAvancer(";");
+    Noeud* condition = expression();
+    testerEtAvancer(";");
+    
+    if(m_lecteur.getSymbole() != ")"){        
+        Noeud* condition = affectation();
+    }
+    
+    testerEtAvancer(")");
+    Noeud* sequence = seqInst();
+    testerEtAvancer("finpour");
+    
+    return nullptr;
+}
