@@ -80,5 +80,18 @@ class NoeudInstSi : public Noeud {
     Noeud*  m_condition;
     Noeud*  m_sequence;
 };
+////////////////////////////////////////////////////////////////////////////////
+class NoeudInstTantQue : public Noeud {
+    // Classe pour représenter un noeud "instruction tant que"
+public:
+    NoeudInstTantQue(Noeud* condition, Noeud* sequence);
+        // Construit une "instruction tant que" avec sa condition et sa séquence d'instruction
+    ~NoeudInstTantQue() {} // A cause du destructeur virtuel de la classe Noeud
+    int executer();// Exécute l'instruction tant que : si condition vraie on exécute la séquence
+private:
+    Noeud* m_condition;
+    Noeud* m_sequence;
+};
+
 
 #endif /* ARBREABSTRAIT_H */
