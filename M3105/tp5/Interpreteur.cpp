@@ -211,8 +211,6 @@ Noeud* Interpreteur::instPour() {
     testerEtAvancer(")");
     Noeud* sequence = seqInst();
     testerEtAvancer("finpour");
-
-        Noeud* sequence = seqInst();
     return nullptr;
 }
 
