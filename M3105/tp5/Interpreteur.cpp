@@ -57,7 +57,7 @@ Noeud* Interpreteur::seqInst() {
     NoeudSeqInst* sequence = new NoeudSeqInst();
     do {
         sequence->ajoute(inst());
-    } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si" || m_lecteur.getSymbole() == "tantque");
+    } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si" || m_lecteur.getSymbole() == "tantque" || m_lecteur.getSymbole() == "repeter");
     // Tant que le symbole courant est un début possible d'instruction...
     // Il faut compléter cette condition chaque fois qu'on rajoute une nouvelle instruction
     return sequence;
@@ -73,6 +73,8 @@ Noeud* Interpreteur::inst() {
         return instSiRiche();
     else if (m_lecteur.getSymbole() == "tantque")
         return instTantQue();
+    else if (m_lecteur.getSymbole() == "repeter")
+        return instRepeter();
         // Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
     else erreur("Instruction incorrecte");
 }
@@ -141,24 +143,26 @@ Noeud* Interpreteur::facteur() {
 
 Noeud* Interpreteur::instSiRiche() {
     //<instSiRiche> ::= si(<expression>)<seqInst> {sinon si(<expression>)<seqInst> }[sinon<seqInst>]finsi
+    vector<Noeud*> conditions;
+    vector<Noeud*> sequences;
     testerEtAvancer("si");
     testerEtAvancer("(");
-    Noeud* condition = expression();
+    conditions.push_back(expression());
     testerEtAvancer(")");
-    Noeud* sequence = seqInst();
+    sequences.push_back(seqInst());
 
     while (m_lecteur.getSymbole() == "sinonsi") {
         testerEtAvancer("sinonsi");
         testerEtAvancer("(");
-        Noeud* Condition = expression();
+        conditions.push_back(expression());
         testerEtAvancer(")");
-        Noeud* sequence = seqInst();
+        sequences.push_back(seqInst());
     }
 
 
     if (m_lecteur.getSymbole() == "sinon") {
-        testerEtAvancer("sinon");      
-        Noeud* sequence = seqInst();
+        testerEtAvancer("sinon");
+        sequences.push_back(seqInst());
     }
     testerEtAvancer("finsi");
 
@@ -174,4 +178,22 @@ Noeud* Interpreteur::instTantQue() {
     testerEtAvancer("fintantque");
     return nullptr;
 }
+
+Noeud * Interpreteur::instRepeter() {
+    testerEtAvancer("repeter");
+    Noeud* sequence = seqInst();
+    testerEtAvancer("jusqua");
+    testerEtAvancer("(");
+    Noeud* condition = expression();
+    testerEtAvancer(")");
+    return nullptr;
+}
+
+//Noeud* Interpreteur::instEcrire(){
+//    testerEtAvancer("ecrire");
+//    do{
+//        
+//    }while(tester(""))
+//    return nullptr;
+//}
 

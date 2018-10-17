@@ -5,11 +5,6 @@ procedure principale()
   si (i>14)
     j=1;
   finsi
-  tantque ( i < 20)
-   i = i+1;
-  fintantque
-finproc
-# Commentaire Final
 
 #test InstSiRiche
 si (j>10)
@@ -21,4 +16,5 @@ sinonsi(j>20)
 sinon
     j=50;
 finsi
+
 finproc
