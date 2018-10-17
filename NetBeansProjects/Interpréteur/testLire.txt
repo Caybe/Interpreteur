@@ -1,0 +1,7 @@
+#test lire
+#
+procedure principale()
+k = 10;
+x = 2;
+lire(k,x)
+finproc
