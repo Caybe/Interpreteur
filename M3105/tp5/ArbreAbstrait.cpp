@@ -99,3 +99,8 @@ void NoeudInstSiRiche::ajouterSeq(Noeud* sequence) {
 void NoeudInstSiRiche::ajouterSinon(Noeud* sequence) {
     m_sinon = sequence;
 }
+
+NoeudInstTantQue::NoeudInstTantQue(Noeud* condition, Noeud* sequence) {
+  int NoeudInstSiRiche::executer() {
+    
+}
