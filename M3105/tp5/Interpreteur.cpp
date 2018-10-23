@@ -64,7 +64,7 @@ Noeud* Interpreteur::seqInst() {
 }
 
 Noeud* Interpreteur::inst() {
-    // <inst> ::= <affectation>  ; | <instSiRiche> | <instTantQue> | <instPour> | <ecrire>
+    // <inst> ::= <affectation>  ; | <instSiRiche> | <instTantQue> | <instPour> | <ecrire> | <lire>
     if (m_lecteur.getSymbole() == "<VARIABLE>") {
         Noeud *affect = affectation();
         testerEtAvancer(";");
