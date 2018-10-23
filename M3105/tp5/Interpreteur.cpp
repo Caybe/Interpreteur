@@ -168,6 +168,7 @@ Noeud* Interpreteur::instSiRiche() {
 
     if (m_lecteur.getSymbole() == "sinon") {
         testerEtAvancer("sinon");
+        noeud->ajouterSinon(seqInst());
     }
     testerEtAvancer("finsi");
 
@@ -192,28 +193,27 @@ Noeud * Interpreteur::instRepeter() {
     testerEtAvancer("(");
     Noeud* condition = expression();
     testerEtAvancer(")");
-    return nullptr;
+    return new NoeudInstRepeter(condition, sequence);
 }
 
 Noeud* Interpreteur::instPour() {
     //<instPour>::= pour([<affectation>];<expression>;[<affectation>])< seqInst> finpour
+    NoeudInstPour* noeud = new NoeudInstPour();
     testerEtAvancer("pour");
     testerEtAvancer("(");
     if (m_lecteur.getSymbole() != ";") {
-        Noeud* condition = affectation();
+        noeud->setInit(affectation());
     }
     testerEtAvancer(";");
-    Noeud* condition = expression();
+    noeud->setCondition(expression());
     testerEtAvancer(";");
-
     if (m_lecteur.getSymbole() != ")") {
-        Noeud* condition = affectation();
+        noeud->setIncrement(affectation());
     }
-
     testerEtAvancer(")");
-    Noeud* sequence = seqInst();
+    noeud->setSequence(seqInst());
     testerEtAvancer("finpour");
-    return nullptr;
+    return noeud;
 }
 
 Noeud* Interpreteur::instEcrire() {
@@ -248,14 +248,15 @@ Noeud* Interpreteur::instLire() {
     //<instLire> ::=lire( <variable> {,<variable> })
     testerEtAvancer("lire");
     testerEtAvancer("(");
-    if (m_lecteur.getSymbole() == "<VARIABLE>") {
-        testerEtAvancer("<VARIABLE>");
-    }
+    tester("<VARIABLE>");
+    Noeud* var = m_table.chercheAjoute(m_lecteur.getSymbole());
+    m_lecteur.avancer();
     while (m_lecteur.getSymbole() != ")") {
         testerEtAvancer(",");
-        if (m_lecteur.getSymbole() == "<VARIABLE>") {
-            testerEtAvancer("<VARIABLE>");
-        }
+        tester("<VARIABLE>");
+        Noeud* var = m_table.chercheAjoute(m_lecteur.getSymbole());
+        
+        m_lecteur.avancer();
     }
     testerEtAvancer(")");
     return nullptr;

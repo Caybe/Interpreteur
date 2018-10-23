@@ -117,33 +117,66 @@ private:
     Noeud* m_sequence;
 };
 
+////////////////////////////////////////////////////////////////////////////////
+
 class NoeudInstRepeter : public Noeud {
-    // Classe pour représenter un noeud "instruction si"
-    //  et ses 2 fils : la condition du si et la séquence d'instruction associée
 public:
-    NoeudInstRepeter();
-    // Construit une "instruction si" avec sa condition et sa séquence d'instruction
+    NoeudInstRepeter(Noeud* condition, Noeud* sequence);
 
     ~NoeudInstRepeter() {
-    } // A cause du destructeur virtuel de la classe Noeud
-    int executer(); // Exécute l'instruction si : si condition vraie on exécute la séquence
+    }
+    int executer();
 private:
     Noeud* m_condition;
     Noeud* m_sequence;
 };
 
-class NoeudInstEcrire : public Noeud {
-    // Classe pour représenter un noeud "instruction ecrire"
-public:
-    NoeudInstEcrire();
+////////////////////////////////////////////////////////////////////////////////
 
-    ~NoeudInstEcrire() {
-    } // A cause du destructeur virtuel de la classe Noeud
-    void ajouterInstru(Noeud* instru);
-    void ajouterChaine(std::string chaine);
-    int executer(); // Exécute l'instruction ecrire
+class NoeudInstPour : public Noeud {
+public:
+
+    NoeudInstPour();
+
+    int executer();
+
+    inline void setSequence(Noeud * seq) {
+        m_sequence = seq;
+    }
+
+    inline void setCondition(Noeud * cond) {
+        m_condition = cond;
+    }
+
+    inline void setInit(Noeud * init) {
+        m_init = init;
+    }
+
+    inline void setIncrement(Noeud * incr) {
+        m_increment = incr;
+    }
 private:
-    vector<Noeud*> m_chaines;
-    
+    Noeud* m_init;
+    Noeud* m_condition;
+    Noeud* m_increment;
+    Noeud* m_sequence;
+};
+
+////////////////////////////////////////////////////////////////////////////////
+
+class NoeudInstLire : public Noeud {
+public:
+    NoeudInstLire(Noeud* variable);
+   
+
+    ~NoeudInstLire() {
+    } 
+    int executer(); 
+
+    inline void ajoute(Noeud* variable) {
+        m_variables.push_back(variable);
+    }
+private:
+    vector<Noeud*> m_variables;
 };
 #endif /* ARBREABSTRAIT_H */

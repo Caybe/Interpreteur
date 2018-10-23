@@ -105,6 +105,12 @@ void NoeudInstSiRiche::ajouterSinon(Noeud* sequence) {
 ////////////////////////////////////////////////////////////////////////////////
 
 NoeudInstTantQue::NoeudInstTantQue(Noeud* condition, Noeud* sequence) : m_condition(condition), m_sequence(sequence) {
+
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstRepeter
+////////////////////////////////////////////////////////////////////////////////
+
+NoeudInstRepeter::NoeudInstRepeter(Noeud* condition, Noeud* sequence) : m_condition(condition), m_sequence(sequence) {
 }
 
 int NoeudInstTantQue::executer() {
@@ -138,4 +144,53 @@ void NoeudInstEcrire::ajouterInstru(Noeud* instru) {
     m_chaine.append(to_string(resinstru));    
 }
 
+int NoeudInstRepeter::executer() {
+    do {
+        m_sequence->executer();
+    } while (!m_condition->executer());
+    return 0;
+}
 
+
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstPour
+////////////////////////////////////////////////////////////////////////////////
+
+NoeudInstPour::NoeudInstPour() {
+}
+
+int NoeudInstPour::executer() {
+    if (m_init != nullptr) {
+        m_init->executer();
+    }
+    while (m_condition->executer()) {
+        m_sequence->executer();
+        if (m_increment != nullptr) {
+            m_increment->executer();
+        }
+    }
+    return 0;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstPour
+////////////////////////////////////////////////////////////////////////////////
+
+    NoeudInstLire::NoeudInstLire(Noeud* variable){
+        m_variables.push_back(variable);
+    }
+
+    int NoeudInstLire::executer(){
+        
+    } 
+
+
+
+
+//((SymboleValue*) m_variable)->setValeur(valeur);
+//
+
+    
+    //TDL executer instlire
+    //interpreteur instlire
