@@ -82,7 +82,7 @@ int NoeudInstSiRiche::executer() {
             b = false;
         };
     }
-    if(b){
+    if (b) {
         m_sinon->executer();
     }
     return 0; // La valeur renvoyée ne représente rien !
@@ -99,3 +99,61 @@ void NoeudInstSiRiche::ajouterSeq(Noeud* sequence) {
 void NoeudInstSiRiche::ajouterSinon(Noeud* sequence) {
     m_sinon = sequence;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstRepeter
+////////////////////////////////////////////////////////////////////////////////
+
+NoeudInstRepeter::NoeudInstRepeter(Noeud* condition, Noeud* sequence) : m_condition(condition), m_sequence(sequence) {
+}
+
+int NoeudInstRepeter::executer() {
+    do {
+        m_sequence->executer();
+    } while (!m_condition->executer());
+    return 0;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstPour
+////////////////////////////////////////////////////////////////////////////////
+
+NoeudInstPour::NoeudInstPour() {
+}
+
+int NoeudInstPour::executer() {
+    if (m_init != nullptr) {
+        m_init->executer();
+    }
+    while (m_condition->executer()) {
+        m_sequence->executer();
+        if (m_increment != nullptr) {
+            m_increment->executer();
+        }
+    }
+    return 0;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstPour
+////////////////////////////////////////////////////////////////////////////////
+
+    NoeudInstLire::NoeudInstLire(Noeud* variable){
+        m_variables.push_back(variable);
+    }
+
+    int NoeudInstLire::executer(){
+        
+    } 
+
+
+
+
+//((SymboleValue*) m_variable)->setValeur(valeur);
+//
+
+    
+    //TDL executer instlire
+    //interpreteur instlire

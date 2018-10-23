@@ -1,0 +1,25 @@
+# Fichier de test
+# Les lignes de commentaires commencent par #
+procedure principale()
+n = 1;
+j=15;
+
+pour(i = 0; i < j; i = i + 1)
+    n = n + 1;
+finpour
+
+n = 1;
+j=15;
+i = 0;
+
+pour(; i < j; i = i + 1)
+    n = n + 1;
+finpour
+
+pour(n = 0; n < j;)
+    n = n + 1;
+finpour
+
+
+finproc
+

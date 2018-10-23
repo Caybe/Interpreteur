@@ -79,7 +79,7 @@ Noeud* Interpreteur::inst() {
         return instRepeter();
     else if (m_lecteur.getSymbole() == "lire")
         return instLire();
-        else if (m_lecteur.getSymbole() == "ecrire")
+    else if (m_lecteur.getSymbole() == "ecrire")
         return instEcrire();
         // Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
     else erreur("Instruction incorrecte");
@@ -167,9 +167,10 @@ Noeud* Interpreteur::instSiRiche() {
 
     if (m_lecteur.getSymbole() == "sinon") {
         testerEtAvancer("sinon");
+        noeud->ajouterSinon(seqInst());
     }
     testerEtAvancer("finsi");
-    
+
     return noeud;
 }
 
@@ -190,31 +191,28 @@ Noeud * Interpreteur::instRepeter() {
     testerEtAvancer("(");
     Noeud* condition = expression();
     testerEtAvancer(")");
-    return nullptr;
+    return new NoeudInstRepeter(condition, sequence);
 }
 
 Noeud* Interpreteur::instPour() {
     //<instPour>::= pour([<affectation>];<expression>;[<affectation>])< seqInst> finpour
+    NoeudInstPour* noeud = new NoeudInstPour();
     testerEtAvancer("pour");
     testerEtAvancer("(");
     if (m_lecteur.getSymbole() != ";") {
-        Noeud* condition = affectation();
+        noeud->setInit(affectation());
     }
     testerEtAvancer(";");
-    Noeud* condition = expression();
+    noeud->setCondition(expression());
     testerEtAvancer(";");
-
     if (m_lecteur.getSymbole() != ")") {
-        Noeud* condition = affectation();
+        noeud->setIncrement(affectation());
     }
-
     testerEtAvancer(")");
-    Noeud* sequence = seqInst();
+    noeud->setSequence(seqInst());
     testerEtAvancer("finpour");
-    return nullptr;
+    return noeud;
 }
-
-
 
 Noeud* Interpreteur::instEcrire() {
     //<instEcrire>  ::= ecrire(<expression> |<chaine> {,<expression> | <chaine> })
@@ -236,7 +234,7 @@ Noeud* Interpreteur::instEcrire() {
         }
     }
     testerEtAvancer(")");
-    
+
     return nullptr;
 }
 
@@ -244,14 +242,15 @@ Noeud* Interpreteur::instLire() {
     //<instLire> ::=lire( <variable> {,<variable> })
     testerEtAvancer("lire");
     testerEtAvancer("(");
-    if (m_lecteur.getSymbole() == "<VARIABLE>"){
-        testerEtAvancer("<VARIABLE>");
-    }
+    tester("<VARIABLE>");
+    Noeud* var = m_table.chercheAjoute(m_lecteur.getSymbole());
+    m_lecteur.avancer();
     while (m_lecteur.getSymbole() != ")") {
         testerEtAvancer(",");
-       if (m_lecteur.getSymbole() == "<VARIABLE>"){
-        testerEtAvancer("<VARIABLE>");
-       } 
+        tester("<VARIABLE>");
+        Noeud* var = m_table.chercheAjoute(m_lecteur.getSymbole());
+        
+        m_lecteur.avancer();
     }
     testerEtAvancer(")");
     return nullptr;
