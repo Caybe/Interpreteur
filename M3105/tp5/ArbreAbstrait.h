@@ -133,6 +133,22 @@ private:
 
 ////////////////////////////////////////////////////////////////////////////////
 
+class NoeudInstEcrire : public Noeud {
+    // Classe pour représenter un noeud "instruction ecrire"
+public:
+    NoeudInstEcrire();
+    ~NoeudInstEcrire() {
+    } // A cause du destructeur virtuel de la classe Noeud
+    void ajouterInstru(Noeud* instru);
+    void ajouterChaine(std::string chaine);
+    int executer(); // Exécute l'instruction ecrire
+private:
+    vector<Noeud*> m_chaines;
+    
+};
+
+////////////////////////////////////////////////////////////////////////////////
+
 class NoeudInstPour : public Noeud {
 public:
 

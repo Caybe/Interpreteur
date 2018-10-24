@@ -104,7 +104,16 @@ void NoeudInstSiRiche::ajouterSinon(Noeud* sequence) {
 // NoeudInstTantQue
 ////////////////////////////////////////////////////////////////////////////////
 
-NoeudInstTantQue::NoeudInstTantQue(Noeud* condition, Noeud* sequence) : m_condition(condition), m_sequence(sequence) {
+NoeudInstTantQue::NoeudInstTantQue(Noeud* condition, Noeud* sequence) : m_condition(condition), m_sequence(sequence) {   
+}
+
+int NoeudInstTantQue::executer() {
+    while (m_condition->executer()) {
+        m_sequence->executer();
+    }
+    return 0;
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudInstRepeter
@@ -113,10 +122,10 @@ NoeudInstTantQue::NoeudInstTantQue(Noeud* condition, Noeud* sequence) : m_condit
 NoeudInstRepeter::NoeudInstRepeter(Noeud* condition, Noeud* sequence) : m_condition(condition), m_sequence(sequence) {
 }
 
-int NoeudInstTantQue::executer() {
-    while (m_condition->executer()) {
+int NoeudInstRepeter::executer() {
+    do {
         m_sequence->executer();
-    }
+    } while (!m_condition->executer());
     return 0;
 }
 
