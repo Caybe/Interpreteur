@@ -138,24 +138,19 @@ int NoeudInstPour::executer() {
 
 
 ////////////////////////////////////////////////////////////////////////////////
-// NoeudInstPour
+// NoeudInstLire
 ////////////////////////////////////////////////////////////////////////////////
 
-    NoeudInstLire::NoeudInstLire(Noeud* variable){
-        m_variables.push_back(variable);
+NoeudInstLire::NoeudInstLire(Noeud* variable) {
+    m_variables.push_back(variable);
+}
+
+int NoeudInstLire::executer() {
+    int valeur;
+    for (Noeud* var : m_variables) {
+        cin >> valeur;
+        ((SymboleValue*) var)->setValeur(valeur);
     }
-
-    int NoeudInstLire::executer(){
-        
-    } 
-
-
-
-
-//((SymboleValue*) m_variable)->setValeur(valeur);
-//
-
-    
-    //TDL executer instlire
-    //interpreteur instlire
+    return 0;
+}
 
