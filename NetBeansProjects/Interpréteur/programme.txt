@@ -4,13 +4,13 @@ procedure principale()
 i = 15;
 
 #test InstSiRiche
-si (i==10)
+si (i=10)
     j= 20;
-sinonsi (i<10)
+sinosi (i<10)
     j=30;
 sinonsi(i>20)
     j=40;
-sinon
+sin
     j=50;
 finsi
 
