@@ -137,20 +137,20 @@ NoeudInstEcrire::NoeudInstEcrire() {
 }
 
 int NoeudInstEcrire::executer() {
-    if((typeid(*p)==typeid(SymboleValue)) && * ((SymboleValue*)p)== "<CHAINE>"){
-        
-    }
-    cout<<m_chaines[i];
-    return 0;
+//    if((typeid(*p)==typeid(SymboleValue)) && * ((SymboleValue*)p)== "<CHAINE>"){
+//        
+//    }
+//    cout<<m_chaines[i];
+//    return 0;
 }
 
 void NoeudInstEcrire::ajouterChaine(std::string chaine) {
-    m_chaine.append(chaine);
+//    m_chaine.append(chaine);
 }
 
 void NoeudInstEcrire::ajouterInstru(Noeud* instru) {
     int resinstru = instru->executer();
-    m_chaine.append(to_string(resinstru));    
+//    m_chaine.append(to_string(resinstru));    
 }
 
 
