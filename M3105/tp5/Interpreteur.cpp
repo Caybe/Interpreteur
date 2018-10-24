@@ -148,6 +148,7 @@ Noeud* Interpreteur::facteur() {
 //}
 
 Noeud* Interpreteur::instSiRiche() {
+    testerEtAvancer("<CHAINE>");
     //<instSiRiche> ::= si(<expression>)<seqInst> {sinon si(<expression>)<seqInst> }[sinon<seqInst>]finsi
     NoeudInstSiRiche* noeud = new NoeudInstSiRiche();
     testerEtAvancer("si");
@@ -181,7 +182,8 @@ Noeud* Interpreteur::instTantQue() {
     testerEtAvancer(")");
     Noeud* sequence = seqInst();
     testerEtAvancer("fintantque");
-    return nullptr;
+    NoeudInstTantQue* noeud = new NoeudInstTantQue(condition, sequence);
+    return noeud;
 }
 
 Noeud * Interpreteur::instRepeter() {
@@ -215,27 +217,31 @@ Noeud* Interpreteur::instPour() {
 }
 
 Noeud* Interpreteur::instEcrire() {
-    //<instEcrire>  ::= ecrire(<expression> |<chaine> {,<expression> | <chaine> })
+    //<instEcrire>  ::= ecrire(<expression> |<chaine> {,<exp(string)expression->executer();ression> | <chaine> })
     testerEtAvancer("ecrire");
     testerEtAvancer("(");
-
+    NoeudInstEcrire* noeud = new NoeudInstEcrire();
     if (m_lecteur.getSymbole() == "<CHAINE>") {
+        noeud->ajouterChaine(m_lecteur.getSymbole().getChaine());        
         testerEtAvancer("<CHAINE>");
     } else {
-        Noeud* condition = expression();
+        Noeud* instru = expression();
+        noeud->ajouterInstru(instru);
     }
 
     while (m_lecteur.getSymbole() != ")") {
         testerEtAvancer(",");
         if (m_lecteur.getSymbole() == "<CHAINE>") {
+            noeud->ajouterChaine(m_lecteur.getSymbole().getChaine());
             testerEtAvancer("<CHAINE>");
+
         } else {
-            Noeud* condition = expression();
+            Noeud* instru= expression();
+            noeud->ajouterInstru(instru);
         }
     }
     testerEtAvancer(")");
-
-    return nullptr;
+    return noeud;
 }
 
 
