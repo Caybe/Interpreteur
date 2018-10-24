@@ -221,25 +221,25 @@ Noeud* Interpreteur::instEcrire() {
     testerEtAvancer("ecrire");
     testerEtAvancer("(");
     NoeudInstEcrire* noeud = new NoeudInstEcrire();
-    if (m_lecteur.getSymbole() == "<CHAINE>") {
-        noeud->ajouterChaine(m_lecteur.getSymbole().getChaine());        
-        testerEtAvancer("<CHAINE>");
-    } else {
-        Noeud* instru = expression();
-        noeud->ajouterInstru(instru);
-    }
+    bool premierPassage = true;
 
-    while (m_lecteur.getSymbole() != ")") {
-        testerEtAvancer(",");
+    do{   
+         if(!premierPassage){
+          testerEtAvancer(",");          
+        }
         if (m_lecteur.getSymbole() == "<CHAINE>") {
-            noeud->ajouterChaine(m_lecteur.getSymbole().getChaine());
+            Noeud* chaine = m_table.chercheAjoute(m_lecteur.getSymbole()); // La variable est ajoutée à la table et on la mémorise   
+            noeud->ajouterInstruction(chaine);
             testerEtAvancer("<CHAINE>");
 
         } else {
-            Noeud* instru= expression();
-            noeud->ajouterInstru(instru);
+            Noeud* instru = expression();
+            noeud->ajouterInstruction(instru);
         }
-    }
+         premierPassage = false;
+        
+    }while (m_lecteur.getSymbole() != ")");
+        
     testerEtAvancer(")");
     return noeud;
 }

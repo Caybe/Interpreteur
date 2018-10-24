@@ -104,7 +104,7 @@ void NoeudInstSiRiche::ajouterSinon(Noeud* sequence) {
 // NoeudInstTantQue
 ////////////////////////////////////////////////////////////////////////////////
 
-NoeudInstTantQue::NoeudInstTantQue(Noeud* condition, Noeud* sequence) : m_condition(condition), m_sequence(sequence) {   
+NoeudInstTantQue::NoeudInstTantQue(Noeud* condition, Noeud* sequence) : m_condition(condition), m_sequence(sequence) {
 }
 
 int NoeudInstTantQue::executer() {
@@ -136,27 +136,22 @@ int NoeudInstRepeter::executer() {
 NoeudInstEcrire::NoeudInstEcrire() {
 }
 
+void NoeudInstEcrire::ajouterInstruction(Noeud* instruction) {
+    m_chaines.push_back(instruction);
+}
+
 int NoeudInstEcrire::executer() {
-    if((typeid(*p)==typeid(SymboleValue)) && * ((SymboleValue*)p)== "<CHAINE>"){
-        
+   
+
+    for (auto v : m_chaines) {
+        if ((typeid (*v) == typeid (SymboleValue)) && *((SymboleValue*) v) == "<CHAINE>") {
+            string chaine=((SymboleValue*) v)->getChaine();    
+            chaine = chaine.substr(1, chaine.size()-2);
+                cout << chaine;                                                    
+        } else {            
+            cout << v->executer();
+        }
     }
-    cout<<m_chaines[i];
-    return 0;
-}
-
-void NoeudInstEcrire::ajouterChaine(std::string chaine) {
-    m_chaine.append(chaine);
-}
-
-void NoeudInstEcrire::ajouterInstru(Noeud* instru) {
-    int resinstru = instru->executer();
-    m_chaine.append(to_string(resinstru));    
-}
-
-int NoeudInstRepeter::executer() {
-    do {
-        m_sequence->executer();
-    } while (!m_condition->executer());
     return 0;
 }
 
@@ -186,13 +181,13 @@ int NoeudInstPour::executer() {
 // NoeudInstPour
 ////////////////////////////////////////////////////////////////////////////////
 
-    NoeudInstLire::NoeudInstLire(Noeud* variable){
-        m_variables.push_back(variable);
-    }
+NoeudInstLire::NoeudInstLire(Noeud* variable) {
+    m_variables.push_back(variable);
+}
 
-    int NoeudInstLire::executer(){
-        
-    } 
+int NoeudInstLire::executer() {
+
+}
 
 
 
@@ -200,6 +195,6 @@ int NoeudInstPour::executer() {
 //((SymboleValue*) m_variable)->setValeur(valeur);
 //
 
-    
-    //TDL executer instlire
-    //interpreteur instlire
+
+//TDL executer instlire
+//interpreteur instlire
