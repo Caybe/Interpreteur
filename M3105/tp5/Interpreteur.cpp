@@ -244,20 +244,22 @@ Noeud* Interpreteur::instEcrire() {
     return noeud;
 }
 
+
 Noeud* Interpreteur::instLire() {
     //<instLire> ::=lire( <variable> {,<variable> })
     testerEtAvancer("lire");
     testerEtAvancer("(");
     tester("<VARIABLE>");
     Noeud* var = m_table.chercheAjoute(m_lecteur.getSymbole());
+    Noeud* noeud = new NoeudInstLire(var);
     m_lecteur.avancer();
     while (m_lecteur.getSymbole() != ")") {
         testerEtAvancer(",");
         tester("<VARIABLE>");
-        Noeud* var = m_table.chercheAjoute(m_lecteur.getSymbole());
-        
+        var = m_table.chercheAjoute(m_lecteur.getSymbole());
+        noeud->ajoute(var);
         m_lecteur.avancer();
     }
     testerEtAvancer(")");
-    return nullptr;
+    return noeud;
 }
