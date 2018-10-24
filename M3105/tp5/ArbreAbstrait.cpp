@@ -104,7 +104,7 @@ void NoeudInstSiRiche::ajouterSinon(Noeud* sequence) {
 // NoeudInstTantQue
 ////////////////////////////////////////////////////////////////////////////////
 
-NoeudInstTantQue::NoeudInstTantQue(Noeud* condition, Noeud* sequence) : m_condition(condition), m_sequence(sequence) {   
+NoeudInstTantQue::NoeudInstTantQue(Noeud* condition, Noeud* sequence) : m_condition(condition), m_sequence(sequence) {
 }
 
 int NoeudInstTantQue::executer() {
@@ -136,24 +136,24 @@ int NoeudInstRepeter::executer() {
 NoeudInstEcrire::NoeudInstEcrire() {
 }
 
+void NoeudInstEcrire::ajouterInstruction(Noeud* instruction) {
+    m_chaines.push_back(instruction);
+}
+
 int NoeudInstEcrire::executer() {
-//    if((typeid(*p)==typeid(SymboleValue)) && * ((SymboleValue*)p)== "<CHAINE>"){
-//        
-//    }
-//    cout<<m_chaines[i];
-//    return 0;
+   
+
+    for (auto v : m_chaines) {
+        if ((typeid (*v) == typeid (SymboleValue)) && *((SymboleValue*) v) == "<CHAINE>") {
+            string chaine=((SymboleValue*) v)->getChaine();    
+            chaine = chaine.substr(1, chaine.size()-2);
+                cout << chaine;                                                    
+        } else {            
+            cout << v->executer();
+        }
+    }
+    return 0;
 }
-
-void NoeudInstEcrire::ajouterChaine(std::string chaine) {
-//    m_chaine.append(chaine);
-}
-
-void NoeudInstEcrire::ajouterInstru(Noeud* instru) {
-    int resinstru = instru->executer();
-//    m_chaine.append(to_string(resinstru));    
-}
-
-
 
 
 ////////////////////////////////////////////////////////////////////////////////

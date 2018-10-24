@@ -2,5 +2,5 @@
 procedure principale()
 k = 10;
 x = 2;
-ecrire("Bonjour","Salut",k+x)
+ecrire("Bonjour 10+2 = ",k+x, " !")
 finproc

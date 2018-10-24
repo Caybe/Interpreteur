@@ -14,5 +14,9 @@ sinon
     j=50;
 finsi
 
+pour(i = 0; i < j; i = i +1)
+    a = 0;
+finpour
+
 
 finproc

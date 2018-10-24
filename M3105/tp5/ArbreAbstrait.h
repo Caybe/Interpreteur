@@ -20,9 +20,7 @@ class Noeud {
 public:
     virtual int executer() = 0; // Méthode pure (non implémentée) qui rend la classe abstraite
 
-    virtual void ajoute(Noeud* instruction) {
-        throw OperationInterditeException();
-    }
+    virtual void ajoute(Noeud* instruction)  { throw OperationInterditeException(); }
 
     virtual ~Noeud() {
     } // Présence d'un destructeur virtuel conseillée dans les classes abstraites
@@ -137,14 +135,14 @@ class NoeudInstEcrire : public Noeud {
     // Classe pour représenter un noeud "instruction ecrire"
 public:
     NoeudInstEcrire();
+
     ~NoeudInstEcrire() {
     } // A cause du destructeur virtuel de la classe Noeud
-    void ajouterInstru(Noeud* instru);
-    void ajouterChaine(std::string chaine);
+    void ajouterInstruction(Noeud* instruction);
     int executer(); // Exécute l'instruction ecrire
 private:
     vector<Noeud*> m_chaines;
-    
+
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -153,7 +151,8 @@ class NoeudInstPour : public Noeud {
 public:
 
     NoeudInstPour();
-
+    ~NoeudInstPour() {
+    }
     int executer();
 
     inline void setSequence(Noeud * seq) {
@@ -183,11 +182,10 @@ private:
 class NoeudInstLire : public Noeud {
 public:
     NoeudInstLire(Noeud* variable);
-   
 
     ~NoeudInstLire() {
-    } 
-    int executer(); 
+    }
+    int executer();
 
     inline void ajoute(Noeud* variable) {
         m_variables.push_back(variable);
