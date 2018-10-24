@@ -153,12 +153,7 @@ void NoeudInstEcrire::ajouterInstru(Noeud* instru) {
     m_chaine.append(to_string(resinstru));    
 }
 
-int NoeudInstRepeter::executer() {
-    do {
-        m_sequence->executer();
-    } while (!m_condition->executer());
-    return 0;
-}
+
 
 
 ////////////////////////////////////////////////////////////////////////////////
