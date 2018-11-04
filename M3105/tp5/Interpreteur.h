@@ -14,7 +14,7 @@ public:
                                       
 	void analyse();                     // Si le contenu du fichier est conforme à la grammaire,
 	                                    //   cette méthode se termine normalement et affiche un message "Syntaxe correcte".
-                                      //   la table des symboles (ts) et l'arbre abstrait (arbre) auront été construits
+                                            //   la table des symboles (ts) et l'arbre abstrait (arbre) auront été construits
 	                                    // Sinon, une exception sera levée
 
 	inline const TableSymboles & getTable () const  { return m_table;    } // accesseur	
@@ -24,7 +24,7 @@ private:
     Lecteur        m_lecteur;  // Le lecteur de symboles utilisé pour analyser le fichier
     TableSymboles  m_table;    // La table des symboles valués
     Noeud*         m_arbre;    // L'arbre abstrait
-
+    int          nbErreurs = 0; 
     // Implémentation de la grammaire
     Noeud*  programme();   //   <programme> ::= procedure principale() <seqInst> finproc FIN_FICHIER
     Noeud*  seqInst();	   //     <seqInst> ::= <inst> { <inst> }

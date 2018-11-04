@@ -4,14 +4,14 @@ procedure principale()
 i = 15;
 
 #test InstSiRiche
-si (i=10)
+sis (i==10)
     j= 20;
 sinosi (i<10)
     j=30;
 sinonsi(i>20)
     j=40;
 sin
-    j=50;
+    j=50;;
 finsi
 
 pour(i = 0; i < j; i = i +1)
