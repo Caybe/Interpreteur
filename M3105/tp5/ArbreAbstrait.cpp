@@ -24,7 +24,7 @@ void NoeudSeqInst::ajoute(Noeud* instruction) {
 void NoeudSeqInst::traduitEncpp(ostream & cout, unsigned int indentation) const {
     for (unsigned int i = 0; i < m_instructions.size(); i++) {
         m_instructions[i]->traduitEncpp(cout, indentation);
-        cout << ";" << endl;
+        cout << endl;
     } // on exécute chaque instruction de la séquence
 
 }
@@ -49,6 +49,7 @@ void NoeudAffectation::traduitEncpp(ostream & cout, unsigned int indentation) co
     m_variable->traduitEncpp(cout, 0);
     cout << " = ";
     m_expression->traduitEncpp(cout, 0);
+    cout << ";";
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -85,22 +86,13 @@ int NoeudOperateurBinaire::executer() {
 
 void NoeudOperateurBinaire::traduitEncpp(ostream & cout, unsigned int indentation) const {
     string sym;
-    if (this->m_operateur == "+") sym = "+";
-    else if (this->m_operateur == "-") sym = "-";
-    else if (this->m_operateur == "*") sym = "*";
-    else if (this->m_operateur == "==") sym = "==";
-    else if (this->m_operateur == "!=") sym = "!=";
-    else if (this->m_operateur == "<") sym = "<";
-    else if (this->m_operateur == ">") sym = ">";
-    else if (this->m_operateur == "<=") sym = "<=";
-    else if (this->m_operateur == ">=") sym = ">=";
-    else if (this->m_operateur == "et") sym = "&&";
+    if (this->m_operateur == "et") sym = "&&";
     else if (this->m_operateur == "ou") sym = "||";
     else if (this->m_operateur == "non") sym = "!";
-    else if (this->m_operateur == "/") sym = "/";
+    else sym = this->m_operateur.getChaine();
     cout << setw(4 * indentation) << "";
     m_operandeGauche->traduitEncpp(cout, 0);
-    cout << sym;
+    cout << " " << sym << " ";
     m_operandeDroit->traduitEncpp(cout, 0);
 }
 
@@ -144,7 +136,7 @@ void NoeudInstSiRiche::traduitEncpp(ostream & cout, unsigned int indentation) co
         m_conditions[i]->traduitEncpp(cout, 0);
         cout << "){" << endl;
         m_sequences[i]->traduitEncpp(cout, indentation + 1);
-        cout << setw(4 * indentation) << "}" << endl;
+        cout << setw(4 * indentation) << "" << "}" << endl;
         if (i < m_conditions.size() - 1) {
             cout << setw(4 * indentation) << "" << "else if (";
         }
@@ -152,7 +144,7 @@ void NoeudInstSiRiche::traduitEncpp(ostream & cout, unsigned int indentation) co
     if (m_sinon != nullptr) {
         cout << setw(4 * indentation) << "" << "else {" << endl;
         m_sinon->traduitEncpp(cout, indentation + 1);
-        cout << setw(4 * indentation) << "}" << endl;
+        cout << setw(4 * indentation) << "" << "}";
     }
 
 }
@@ -197,11 +189,11 @@ int NoeudInstRepeter::executer() {
 }
 
 void NoeudInstRepeter::traduitEncpp(ostream& cout, unsigned int indentation) const {
-    cout << setw(4 * indentation) << "" << "do {";
+    cout << setw(4 * indentation) << "" << "do {" << endl;
     m_sequence->traduitEncpp(cout, indentation + 1);
     cout << setw(4 * indentation) << "" << "} while (";
     m_condition->traduitEncpp(cout, 0);
-    cout << ");" << endl;
+    cout << ")";
 }
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudInstEcrire
@@ -236,8 +228,8 @@ void NoeudInstEcrire::traduitEncpp(ostream& cout, unsigned int indentation) cons
         if ((typeid (*v) == typeid (SymboleValue)) && *((SymboleValue*) v) == "<CHAINE>") {
             string chaine = ((SymboleValue*) v)->getChaine();
             chaine = chaine.substr(1, chaine.size() - 2);
-            cout << " << " << chaine;
-
+            cout << " << \"" << chaine;
+            cout << "\"";
         } else {
             cout << " << ";
             v->traduitEncpp(cout, 0);
@@ -306,6 +298,6 @@ void NoeudInstLire::traduitEncpp(ostream& cout, unsigned int indentation) const 
         cout << " >> ";
         var->traduitEncpp(cout, 0);
     }
-    cout << setw(4 * indentation) << "" << ";";
+    cout << ";";
 }
 
