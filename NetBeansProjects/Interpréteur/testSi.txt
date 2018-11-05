@@ -4,7 +4,7 @@
 # test1 = 0;
 # test2 = 10; 
 
-Procedure Principale()
+procedure principale()
     test1 = 0;
     test2 = 1;
 

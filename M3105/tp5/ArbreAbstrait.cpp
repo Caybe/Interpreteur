@@ -252,7 +252,7 @@ void NoeudInstPour::traduitEncpp(ostream& cout, unsigned int indentation){
     m_increment->traduitEncpp(cout,0);
     cout<< " ) {" << endl;
     m_sequence->traduitEncpp(cout,indentation++);
-    cout << setw(4*indentation) << "" << "}";
+    cout << setw(4*indentation) << "" << "}"<<endl;
     
 }
 
