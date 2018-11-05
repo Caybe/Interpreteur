@@ -310,3 +310,15 @@ Noeud* Interpreteur::instLire() {
     testerEtAvancer(")");
     return noeud;
 }
+
+
+    void Interpreteur::traduitEncpp(ostream & cout, unsigned int indentation) const{
+        cout << setw(4*indentation) << "" << "int main() {" << endl;
+        for(int i = 0; i < m_table.getTaille(); i++){
+            m_table[i].traduitEncpp(cout, indentation+1);
+        }
+        getArbre()->traduitEncpp(cout, indentation+1);
+        cout << setw(4*indentation+1) << "" << "return 0;" << endl;
+        cout << setw(4*indentation) << "}" << endl;
+    }
+

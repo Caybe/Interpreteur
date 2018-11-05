@@ -24,7 +24,7 @@ public:
         throw OperationInterditeException();
     }
 
-    virtual void traduitEncpp(ostream & cout, unsigned int indentation) = 0;
+    virtual void traduitEncpp(ostream & cout, unsigned int indentation) const;
 
     virtual ~Noeud() {
     } // Présence d'un destructeur virtuel conseillée dans les classes abstraites
@@ -42,7 +42,6 @@ public:
     } // A cause du destructeur virtuel de la classe Noeud
     int executer(); // Exécute chaque instruction de la séquence
     void ajoute(Noeud* instruction); // Ajoute une instruction à la séquence
-    void traduitEncpp(ostream & cout, unsigned int indentation);
 private:
     vector<Noeud *> m_instructions; // pour stocker les instructions de la séquence
 };
@@ -58,7 +57,6 @@ public:
     ~NoeudAffectation() {
     } // A cause du destructeur virtuel de la classe Noeud
     int executer(); // Exécute (évalue) l'expression et affecte sa valeur à la variable
-    void traduitEncpp(ostream & cout, unsigned int indentation);
 
 private:
     Noeud* m_variable;
@@ -77,7 +75,6 @@ public:
     ~NoeudOperateurBinaire() {
     } // A cause du destructeur virtuel de la classe Noeud
     int executer(); // Exécute (évalue) l'opération binaire)
-    void traduitEncpp(ostream & cout, unsigned int indentation);
 
 private:
     Symbole m_operateur;
@@ -100,7 +97,6 @@ public:
     void ajouterCond(Noeud* condition);
     void ajouterSeq(Noeud* sequence);
     void ajouterSinon(Noeud* sequence);
-    void traduitEncpp(ostream & cout, unsigned int indentation);
 
 private:
     vector<Noeud*> m_conditions;
