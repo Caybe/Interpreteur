@@ -1,12 +1,16 @@
 #test tant que
-#
+##############
+#Résultat attendu :
+# i = 10
+# test = 20
+
 procedure principale()
 i = 0;
-k = 10;
+test = 10;
+
 tantque (i<10)
 i = i+1;
-k = k+1;
+test = test+1;
 fintantque
 
 finproc
-
