@@ -24,7 +24,7 @@ public:
         throw OperationInterditeException();
     }
 
-    virtual void traduitEncpp(ostream & cout, unsigned int indentation) const;
+    virtual void traduitEncpp(ostream & cout, unsigned int indentation) const = 0;
 
     virtual ~Noeud() {
     } // Présence d'un destructeur virtuel conseillée dans les classes abstraites
@@ -42,6 +42,7 @@ public:
     } // A cause du destructeur virtuel de la classe Noeud
     int executer(); // Exécute chaque instruction de la séquence
     void ajoute(Noeud* instruction); // Ajoute une instruction à la séquence
+    void traduitEncpp(ostream & cout, unsigned int indentation) const;
 private:
     vector<Noeud *> m_instructions; // pour stocker les instructions de la séquence
 };
@@ -57,7 +58,7 @@ public:
     ~NoeudAffectation() {
     } // A cause du destructeur virtuel de la classe Noeud
     int executer(); // Exécute (évalue) l'expression et affecte sa valeur à la variable
-
+    void traduitEncpp(ostream & cout, unsigned int indentation) const;
 private:
     Noeud* m_variable;
     Noeud* m_expression;
@@ -75,7 +76,7 @@ public:
     ~NoeudOperateurBinaire() {
     } // A cause du destructeur virtuel de la classe Noeud
     int executer(); // Exécute (évalue) l'opération binaire)
-
+    void traduitEncpp(ostream & cout, unsigned int indentation) const;
 private:
     Symbole m_operateur;
     Noeud* m_operandeGauche;
@@ -97,7 +98,7 @@ public:
     void ajouterCond(Noeud* condition);
     void ajouterSeq(Noeud* sequence);
     void ajouterSinon(Noeud* sequence);
-
+    void traduitEncpp(ostream & cout, unsigned int indentation) const;
 private:
     vector<Noeud*> m_conditions;
     vector<Noeud*> m_sequences;
@@ -114,8 +115,7 @@ public:
     ~NoeudInstTantQue() {
     } // A cause du destructeur virtuel de la classe Noeud
     int executer(); // Exécute l'instruction tant que : si condition vraie on exécute la séquence
-    void traduitEncpp(ostream & cout, unsigned int indentation);
-
+    void traduitEncpp(ostream & cout, unsigned int indentation) const;
 private:
     Noeud* m_condition;
     Noeud* m_sequence;
@@ -126,12 +126,11 @@ private:
 class NoeudInstRepeter : public Noeud {
 public:
     NoeudInstRepeter(Noeud* condition, Noeud* sequence);
-
+    
     ~NoeudInstRepeter() {
     }
     int executer();
-    void traduitEncpp(ostream & cout, unsigned int indentation);
-
+    void traduitEncpp(ostream & cout, unsigned int indentation) const;
 private:
     Noeud* m_condition;
     Noeud* m_sequence;
@@ -148,8 +147,7 @@ public:
     } // A cause du destructeur virtuel de la classe Noeud
     void ajouterInstruction(Noeud* instruction);
     int executer(); // Exécute l'instruction ecrire
-    void traduitEncpp(ostream & cout, unsigned int indentation);
-
+    void traduitEncpp(ostream & cout, unsigned int indentation) const;
 private:
     vector<Noeud*> m_chaines;
 
@@ -165,8 +163,6 @@ public:
     ~NoeudInstPour() {
     }
     int executer();
-    void traduitEncpp(ostream & cout, unsigned int indentation);
-
     
     inline void setSequence(Noeud * seq) {
         m_sequence = seq;
@@ -183,6 +179,7 @@ public:
     inline void setIncrement(Noeud * incr) {
         m_increment = incr;
     }
+    void traduitEncpp(ostream & cout, unsigned int indentation) const;
 private:
     Noeud* m_init;
     Noeud* m_condition;
@@ -199,11 +196,11 @@ public:
     ~NoeudInstLire() {
     }
     int executer();
-    void traduitEncpp(ostream & cout, unsigned int indentation);
-    
+
     inline void ajoute(Noeud* variable) {
         m_variables.push_back(variable);
     }
+    void traduitEncpp(ostream & cout, unsigned int indentation) const;
 private:
     vector<Noeud*> m_variables;
 };

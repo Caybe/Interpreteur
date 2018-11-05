@@ -10,7 +10,7 @@ m_lecteur(fichier), m_table(), m_arbre(nullptr) {
 
 void Interpreteur::analyse() {
     m_arbre = programme(); // on lance l'analyse de la première règle
-    if(nbErreurs != 0){
+    if (nbErreurs != 0) {
         m_arbre = nullptr;
         cerr << "Nombres d'erreurs : " << nbErreurs << endl;
     }
@@ -170,72 +170,36 @@ Noeud* Interpreteur::facteur() {
 
 Noeud* Interpreteur::instSiRiche() {
     //<instSiRiche> ::= si(<expression>)<seqInst> {sinon si(<expression>)<seqInst> }[sinon<seqInst>]finsi
-
     NoeudInstSiRiche* noeud = new NoeudInstSiRiche();
-
     testerEtAvancer("si");
-
-
     testerEtAvancer("(");
-
     noeud->ajouterCond(expression());
-
     testerEtAvancer(")");
-
     noeud->ajouterSeq(seqInst());
-
     while (m_lecteur.getSymbole() == "sinonsi") {
         testerEtAvancer("sinonsi");
-
         testerEtAvancer("(");
-
         noeud->ajouterCond(expression());
-
         testerEtAvancer(")");
-
         noeud->ajouterSeq(seqInst());
     }
-
-
     if (m_lecteur.getSymbole() == "sinon") {
-
         testerEtAvancer("sinon");
         noeud->ajouterSinon(seqInst());
     }
-    try {
-        testerEtAvancer("finsi");
-    } catch (const SyntaxeException& e) {
-        cerr << e.what() << endl;
-        m_lecteur.avancer();
-    }
-
+    testerEtAvancer("finsi");
+    testerEtAvancer(";");
     return noeud;
 
 }
 
 Noeud* Interpreteur::instTantQue() {
-    try {
-        testerEtAvancer("tantque");
-    } catch (const SyntaxeException& e) {
-        cerr << e.what() << endl;
-    }
-    try {
-        testerEtAvancer("(");
-    } catch (const SyntaxeException& e) {
-        cerr << e.what() << endl;
-    }
+    testerEtAvancer("tantque");
+    testerEtAvancer("(");
     Noeud* condition = expression();
-    try {
-        testerEtAvancer(")");
-    } catch (const SyntaxeException& e) {
-        cerr << e.what() << endl;
-    }
+    testerEtAvancer(")");
     Noeud* sequence = seqInst();
-    try {
-        testerEtAvancer("fintantque");
-    } catch (const SyntaxeException& e) {
-        cerr << e.what() << endl;
-    }
+    testerEtAvancer("fintantque");
     NoeudInstTantQue* noeud = new NoeudInstTantQue(condition, sequence);
     return noeud;
 }
@@ -253,44 +217,32 @@ Noeud * Interpreteur::instRepeter() {
 Noeud* Interpreteur::instPour() {
     //<instPour>::= pour([<affectation>];<expression>;[<affectation>])< seqInst> finpour
     NoeudInstPour* noeud = new NoeudInstPour();
-    try {
-        testerEtAvancer("pour");
-    } catch (const SyntaxeException& e) {
-        cerr << e.what() << endl;
-    }
-    try {
-        testerEtAvancer("(");
-    } catch (const SyntaxeException& e) {
-        cerr << e.what() << endl;
-    }
+
+    testerEtAvancer("pour");
+
+
+    testerEtAvancer("(");
+
     if (m_lecteur.getSymbole() != ";") {
         noeud->setInit(affectation());
     }
-    try {
-        testerEtAvancer(";");
-    } catch (const SyntaxeException& e) {
-        cerr << e.what() << endl;
-    }
+
+    testerEtAvancer(";");
+
     noeud->setCondition(expression());
-    try {
-        testerEtAvancer(";");
-    } catch (const SyntaxeException& e) {
-        cerr << e.what() << endl;
-    }
+
+    testerEtAvancer(";");
+
     if (m_lecteur.getSymbole() != ")") {
         noeud->setIncrement(affectation());
     }
-    try {
-        testerEtAvancer(")");
-    } catch (const SyntaxeException& e) {
-        cerr << e.what() << endl;
-    }
+
+    testerEtAvancer(")");
+
     noeud->setSequence(seqInst());
-    try {
-        testerEtAvancer("finpour");
-    } catch (const SyntaxeException& e) {
-        cerr << e.what() << endl;
-    }
+
+    testerEtAvancer("finpour");
+
 
     return noeud;
 }
@@ -352,14 +304,15 @@ Noeud* Interpreteur::instLire() {
     return noeud;
 }
 
-
-    void Interpreteur::traduitEncpp(ostream & cout, unsigned int indentation) const{
-        cout << setw(4*indentation) << "" << "int main() {" << endl;
-        for(int i = 0; i < m_table.getTaille(); i++){
-            m_table[i].traduitEncpp(cout, indentation+1);
+void Interpreteur::traduitEncpp(ostream & cout, unsigned int indentation) const {
+    cout << setw(4 * indentation) << "" << "int main() {" << endl;
+    for (int i = 0; i < m_table.getTaille(); i++) {
+        if (m_table[i] == "<VARIABLE>") {
+            cout << setw(4 * indentation + 1) << "" << "int " << m_table[i].getChaine() << ";" << endl;
         }
-        getArbre()->traduitEncpp(cout, indentation+1);
-        cout << setw(4*indentation+1) << "" << "return 0;" << endl;
-        cout << setw(4*indentation) << "}" << endl;
     }
+    getArbre()->traduitEncpp(cout, indentation + 1);
+    cout << setw(4 * indentation + 1) << "" << "return 0;" << endl;
+    cout << setw(4 * indentation) << "}" << endl;
+}
 
