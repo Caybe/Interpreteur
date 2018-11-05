@@ -188,7 +188,7 @@ Noeud* Interpreteur::instSiRiche() {
         noeud->ajouterSinon(seqInst());
     }
     testerEtAvancer("finsi");
-    testerEtAvancer(";");
+    
     return noeud;
 
 }

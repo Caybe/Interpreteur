@@ -204,6 +204,7 @@ int NoeudInstEcrire::executer() {
             cout << v->executer();
         }
     }
+    cout << endl;
     return 0;
 }
 

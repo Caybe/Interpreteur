@@ -40,10 +40,10 @@
       <itemPath>Makefile</itemPath>
       <itemPath>programme.txt</itemPath>
       <itemPath>testEcrire.txt</itemPath>
+      <itemPath>testGlobal.txt</itemPath>
       <itemPath>testInstTantQue.txt</itemPath>
       <itemPath>testLire.txt</itemPath>
       <itemPath>testSi.txt</itemPath>
-      <itemPath>testSiErreur.txt</itemPath>
     </logicalFolder>
     <itemPath>testPour.txt</itemPath>
     <itemPath>testRepeter.txt</itemPath>
