@@ -214,12 +214,28 @@ Noeud* Interpreteur::instSiRiche() {
 }
 
 Noeud* Interpreteur::instTantQue() {
-    testerEtAvancer("tantque");
-    testerEtAvancer("(");
+    try {
+        testerEtAvancer("tantque");
+    } catch (const SyntaxeException& e) {
+        cerr << e.what() << endl;
+    }
+    try {
+        testerEtAvancer("(");
+    } catch (const SyntaxeException& e) {
+        cerr << e.what() << endl;
+    }
     Noeud* condition = expression();
-    testerEtAvancer(")");
+    try {
+        testerEtAvancer(")");
+    } catch (const SyntaxeException& e) {
+        cerr << e.what() << endl;
+    }
     Noeud* sequence = seqInst();
-    testerEtAvancer("fintantque");
+    try {
+        testerEtAvancer("fintantque");
+    } catch (const SyntaxeException& e) {
+        cerr << e.what() << endl;
+    }
     NoeudInstTantQue* noeud = new NoeudInstTantQue(condition, sequence);
     return noeud;
 }
@@ -237,20 +253,45 @@ Noeud * Interpreteur::instRepeter() {
 Noeud* Interpreteur::instPour() {
     //<instPour>::= pour([<affectation>];<expression>;[<affectation>])< seqInst> finpour
     NoeudInstPour* noeud = new NoeudInstPour();
-    testerEtAvancer("pour");
-    testerEtAvancer("(");
+    try {
+        testerEtAvancer("pour");
+    } catch (const SyntaxeException& e) {
+        cerr << e.what() << endl;
+    }
+    try {
+        testerEtAvancer("(");
+    } catch (const SyntaxeException& e) {
+        cerr << e.what() << endl;
+    }
     if (m_lecteur.getSymbole() != ";") {
         noeud->setInit(affectation());
     }
-    testerEtAvancer(";");
+    try {
+        testerEtAvancer(";");
+    } catch (const SyntaxeException& e) {
+        cerr << e.what() << endl;
+    }
     noeud->setCondition(expression());
-    testerEtAvancer(";");
+    try {
+        testerEtAvancer(";");
+    } catch (const SyntaxeException& e) {
+        cerr << e.what() << endl;
+    }
     if (m_lecteur.getSymbole() != ")") {
         noeud->setIncrement(affectation());
     }
-    testerEtAvancer(")");
+    try {
+        testerEtAvancer(")");
+    } catch (const SyntaxeException& e) {
+        cerr << e.what() << endl;
+    }
     noeud->setSequence(seqInst());
-    testerEtAvancer("finpour");
+    try {
+        testerEtAvancer("finpour");
+    } catch (const SyntaxeException& e) {
+        cerr << e.what() << endl;
+    }
+
     return noeud;
 }
 
