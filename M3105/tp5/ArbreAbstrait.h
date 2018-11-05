@@ -118,6 +118,8 @@ public:
     ~NoeudInstTantQue() {
     } // A cause du destructeur virtuel de la classe Noeud
     int executer(); // Exécute l'instruction tant que : si condition vraie on exécute la séquence
+    void traduitEncpp(ostream & cout, unsigned int indentation);
+
 private:
     Noeud* m_condition;
     Noeud* m_sequence;
@@ -132,6 +134,8 @@ public:
     ~NoeudInstRepeter() {
     }
     int executer();
+    void traduitEncpp(ostream & cout, unsigned int indentation);
+
 private:
     Noeud* m_condition;
     Noeud* m_sequence;
@@ -148,6 +152,8 @@ public:
     } // A cause du destructeur virtuel de la classe Noeud
     void ajouterInstruction(Noeud* instruction);
     int executer(); // Exécute l'instruction ecrire
+    void traduitEncpp(ostream & cout, unsigned int indentation);
+
 private:
     vector<Noeud*> m_chaines;
 
@@ -163,7 +169,9 @@ public:
     ~NoeudInstPour() {
     }
     int executer();
+    void traduitEncpp(ostream & cout, unsigned int indentation);
 
+    
     inline void setSequence(Noeud * seq) {
         m_sequence = seq;
     }
@@ -195,7 +203,8 @@ public:
     ~NoeudInstLire() {
     }
     int executer();
-
+    void traduitEncpp(ostream & cout, unsigned int indentation);
+    
     inline void ajoute(Noeud* variable) {
         m_variables.push_back(variable);
     }
