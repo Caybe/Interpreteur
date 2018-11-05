@@ -20,7 +20,11 @@ class Noeud {
 public:
     virtual int executer() = 0; // Méthode pure (non implémentée) qui rend la classe abstraite
 
-    virtual void ajoute(Noeud* instruction)  { throw OperationInterditeException(); }
+    virtual void ajoute(Noeud* instruction) {
+        throw OperationInterditeException();
+    }
+
+    virtual void traduitEncpp(ostream & cout, unsigned int indentation) const;
 
     virtual ~Noeud() {
     } // Présence d'un destructeur virtuel conseillée dans les classes abstraites
@@ -38,7 +42,6 @@ public:
     } // A cause du destructeur virtuel de la classe Noeud
     int executer(); // Exécute chaque instruction de la séquence
     void ajoute(Noeud* instruction); // Ajoute une instruction à la séquence
-
 private:
     vector<Noeud *> m_instructions; // pour stocker les instructions de la séquence
 };
@@ -94,6 +97,7 @@ public:
     void ajouterCond(Noeud* condition);
     void ajouterSeq(Noeud* sequence);
     void ajouterSinon(Noeud* sequence);
+
 private:
     vector<Noeud*> m_conditions;
     vector<Noeud*> m_sequences;
@@ -110,6 +114,8 @@ public:
     ~NoeudInstTantQue() {
     } // A cause du destructeur virtuel de la classe Noeud
     int executer(); // Exécute l'instruction tant que : si condition vraie on exécute la séquence
+    void traduitEncpp(ostream & cout, unsigned int indentation);
+
 private:
     Noeud* m_condition;
     Noeud* m_sequence;
@@ -124,6 +130,8 @@ public:
     ~NoeudInstRepeter() {
     }
     int executer();
+    void traduitEncpp(ostream & cout, unsigned int indentation);
+
 private:
     Noeud* m_condition;
     Noeud* m_sequence;
@@ -140,6 +148,8 @@ public:
     } // A cause du destructeur virtuel de la classe Noeud
     void ajouterInstruction(Noeud* instruction);
     int executer(); // Exécute l'instruction ecrire
+    void traduitEncpp(ostream & cout, unsigned int indentation);
+
 private:
     vector<Noeud*> m_chaines;
 
@@ -151,10 +161,13 @@ class NoeudInstPour : public Noeud {
 public:
 
     NoeudInstPour();
+
     ~NoeudInstPour() {
     }
     int executer();
+    void traduitEncpp(ostream & cout, unsigned int indentation);
 
+    
     inline void setSequence(Noeud * seq) {
         m_sequence = seq;
     }
@@ -186,7 +199,8 @@ public:
     ~NoeudInstLire() {
     }
     int executer();
-
+    void traduitEncpp(ostream & cout, unsigned int indentation);
+    
     inline void ajoute(Noeud* variable) {
         m_variables.push_back(variable);
     }

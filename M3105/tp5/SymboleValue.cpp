@@ -23,3 +23,11 @@ ostream & operator<<(ostream & cout, const SymboleValue & symbole) {
   else cout << "indefinie ";
   return cout;
 }
+
+
+ void SymboleValue::traduitEncpp(ostream & cout, int indentation){
+     cout << setw(4*indentation) << "" << "int" << (Symbole) this;
+     if (m_defini) cout << " = " << m_valeur;
+     cout << ";" << endl;
+ }
+
