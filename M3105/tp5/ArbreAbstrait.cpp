@@ -42,7 +42,6 @@ int NoeudAffectation::executer() {
 }
 
 void NoeudAffectation::traduitEncpp(ostream & cout, unsigned int indentation) const{
-    m_variable->traduitEncpp(cout, 0);
     m_expression->traduitEncpp(cout, 0);
 }
 
@@ -253,8 +252,13 @@ void NoeudInstPour::traduitEncpp(ostream& cout, unsigned int indentation) const{
     cout << " ; ";
     m_increment->traduitEncpp(cout,0);
     cout<< " ) {" << endl;
+
     m_sequence->traduitEncpp(cout,indentation++);
     cout << setw(4*indentation) << "" << "}"<<endl;
+
+    m_sequence->traduitEncpp(cout,indentation+1);
+    cout << setw(4*indentation) << "" << "}";
+
     
 }
 
