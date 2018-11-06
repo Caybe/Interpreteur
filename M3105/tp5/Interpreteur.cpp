@@ -321,7 +321,7 @@ void Interpreteur::traduitEncpp(ostream & cout, unsigned int indentation) const 
 //procedure
 
 Noeud* Interpreteur::instProcedure() {
-    testerEtAvancer("appel");
+    testerEtAvancer("procedure");
     testerEtAvancer("(");
     if (m_lecteur.getSymbole() == "<VARIABLE") {
         m_table.chercheAjoute(m_lecteur.getSymbole()); // La variable est ajoutée à la table et on la mémorise
