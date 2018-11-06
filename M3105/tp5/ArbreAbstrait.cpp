@@ -134,15 +134,17 @@ void NoeudInstSiRiche::traduitEncpp(ostream & cout, unsigned int indentation) co
     cout << setw(4 * indentation) << "" << "if (";
     for (int i = 0; i < m_conditions.size(); i++) {
         m_conditions[i]->traduitEncpp(cout, 0);
-        cout << "){" << endl;
+        cout << ") {" << endl;
         m_sequences[i]->traduitEncpp(cout, indentation + 1);
-        cout << setw(4 * indentation) << "" << "}" << endl;
+        cout << setw(4 * indentation) << "" << "}";
         if (i < m_conditions.size() - 1) {
-            cout << setw(4 * indentation) << "" << "else if (";
+            cout << " else if (";
+        } else {
+
         }
     }
     if (m_sinon != nullptr) {
-        cout << setw(4 * indentation) << "" << "else {" << endl;
+        cout << " else {" << endl;
         m_sinon->traduitEncpp(cout, indentation + 1);
         cout << setw(4 * indentation) << "" << "}";
     }
@@ -255,18 +257,20 @@ int NoeudInstPour::executer() {
         if (m_increment != nullptr) {
             m_increment->executer();
         }
-        cout << " ; ";
     }
     return 0;
 }
 
 void NoeudInstPour::traduitEncpp(ostream& cout, unsigned int indentation) const {
-    cout << setw(4 * indentation) << "" << "for(int ";
-    m_init->traduitEncpp(cout, 0);
-    cout << " ; ";
+    cout << setw(4 * indentation) << "" << "for ( ";
+    if (m_init != nullptr) {
+        m_init->traduitEncpp(cout, 0);
+    }
     m_condition->traduitEncpp(cout, 0);
-    cout << " ; ";
-    m_increment->traduitEncpp(cout, 0);
+    cout << ";";
+    if (m_increment != nullptr) {
+        m_increment->traduitEncpp(cout, 0);
+    }
     cout << " ) {" << endl;
     m_sequence->traduitEncpp(cout, indentation + 1);
     cout << setw(4 * indentation) << "" << "}";

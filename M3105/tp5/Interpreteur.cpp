@@ -188,7 +188,7 @@ Noeud* Interpreteur::instSiRiche() {
         noeud->ajouterSinon(seqInst());
     }
     testerEtAvancer("finsi");
-    
+
     return noeud;
 
 }
@@ -305,6 +305,8 @@ Noeud* Interpreteur::instLire() {
 }
 
 void Interpreteur::traduitEncpp(ostream & cout, unsigned int indentation) const {
+    cout << "#include <iostream>" << endl << endl;
+    cout << "using namespace std;" << endl << endl;
     cout << setw(4 * indentation) << "" << "int main() {" << endl;
     for (int i = 0; i < m_table.getTaille(); i++) {
         if (m_table[i] == "<VARIABLE>") {
@@ -314,5 +316,24 @@ void Interpreteur::traduitEncpp(ostream & cout, unsigned int indentation) const 
     getArbre()->traduitEncpp(cout, indentation + 1);
     cout << setw(4 * (indentation + 1)) << "" << "return 0;" << endl;
     cout << setw(4 * indentation) << "}" << endl;
+}
+
+//procedure
+
+Noeud* Interpreteur::instProcedure() {
+    testerEtAvancer("appel");
+    testerEtAvancer("(");
+    if (m_lecteur.getSymbole() == "<VARIABLE") {
+        m_table.chercheAjoute(m_lecteur.getSymbole()); // La variable est ajoutée à la table et on la mémorise
+        m_lecteur.avancer();
+        while (m_lecteur.getSymbole() == ",") {
+            m_table.chercheAjoute(m_lecteur.getSymbole()); // La variable est ajoutée à la table et on la mémorise
+            m_lecteur.avancer();
+        }
+    }
+
+
+    NoeudProc* noeud = new NoeudProc(seqInst);
+    return noeud;
 }
 

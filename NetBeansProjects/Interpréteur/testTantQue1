@@ -1,0 +1,17 @@
+#test tant que
+##############
+#Résultat attendu :
+# a = 10
+# b = 1024
+
+procedure principale()
+a = 0;
+b = 1;
+
+tantque (a < 10)
+a = a+1;
+b = b*2;
+fintantque
+ecrire(b)
+finproc
+
