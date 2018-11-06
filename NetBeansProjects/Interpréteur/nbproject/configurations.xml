@@ -45,13 +45,32 @@
                    displayName="Test Files"
                    projectFiles="false"
                    kind="TEST_LOGICAL_FOLDER">
+      <logicalFolder name="f1"
+                     displayName="testTantQue"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>../../M3105/tp5/tests/TestTantQue.cpp</itemPath>
+        <itemPath>../../M3105/tp5/tests/TestTantQue.h</itemPath>
+        <itemPath>../../M3105/tp5/tests/newtestrunner2.cpp</itemPath>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
                    projectFiles="false"
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
+      <itemPath>programme.txt</itemPath>
+      <itemPath>testEcrire.txt</itemPath>
+      <itemPath>testGlobal.txt</itemPath>
+      <itemPath>testInstTantQue.txt</itemPath>
+      <itemPath>testLire.txt</itemPath>
+      <itemPath>testSi.txt</itemPath>
+      <itemPath>traduitencpp.cpp</itemPath>
     </logicalFolder>
+    <itemPath>testDemo.txt</itemPath>
+    <itemPath>testPour.txt</itemPath>
+    <itemPath>testRepeter.txt</itemPath>
+    <itemPath>testTantQue1</itemPath>
   </logicalFolder>
   <sourceRootList>
     <Elem>../../M3105/tp5</Elem>
