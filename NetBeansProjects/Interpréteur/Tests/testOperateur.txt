@@ -1,0 +1,27 @@
+# Test de la priorité des opérateurs
+####################################
+
+procedure principale()
+
+
+ecrire("Test de la priorité des opérateurs");
+ecrire("***********************************");
+ecrire(" ");
+ecrire("Priorité de la multiplication :");
+ecrire("i = 2 + 4 * 6");
+ecrire(" Résultat attendu : ");
+ecrire("i = 26 (et non i = 36 sans priorité des opérateurs) ");
+ecrire(" Résultat : ");
+i = 2 + 4 * 6;
+ecrire(" i= ", i);
+
+ecrire("");
+ecrire("Priorité des parenthèses :");
+ecrire("j = (2 + 4) * 6");
+ecrire(" Résultat attendu : ");
+ecrire("j = 36 (et non i = 26 sans priorité des opérateurs) ");
+ecrire(" Résultat : ");
+j = (2+4) * 6;
+ecrire(" j= ", j);
+
+finproc
