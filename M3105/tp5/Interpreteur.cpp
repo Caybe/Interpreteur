@@ -387,21 +387,25 @@ void Interpreteur::traduitEncpp(ostream & cout, unsigned int indentation) const 
 }
 
 //procedure
+//
+//Noeud* Interpreteur::instProcedure() {
+//    testerEtAvancer("procedure");
+//    testerEtAvancer("(");
+//    if (m_lecteur.getSymbole() == "<VARIABLE") {
+//        m_table.chercheAjoute(m_lecteur.getSymbole()); // La variable est ajoutée à la table et on la mémorise
+//        m_lecteur.avancer();
+//        while (m_lecteur.getSymbole() == ",") {
+//            m_table.chercheAjoute(m_lecteur.getSymbole()); // La variable est ajoutée à la table et on la mémorise
+//            m_lecteur.avancer();
+//        }
+//    }
+//
+//
+//    NoeudProc* noeud = new NoeudProc(seqInst);
+//    return noeud;
+//}
 
-Noeud* Interpreteur::instProcedure() {
-    testerEtAvancer("procedure");
-    testerEtAvancer("(");
-    if (m_lecteur.getSymbole() == "<VARIABLE") {
-        m_table.chercheAjoute(m_lecteur.getSymbole()); // La variable est ajoutée à la table et on la mémorise
-        m_lecteur.avancer();
-        while (m_lecteur.getSymbole() == ",") {
-            m_table.chercheAjoute(m_lecteur.getSymbole()); // La variable est ajoutée à la table et on la mémorise
-            m_lecteur.avancer();
-        }
-    }
-
-
-    NoeudProc* noeud = new NoeudProc(seqInst);
-    return noeud;
-}
+//Noeud* Interpreteur::instAppel(){
+//    
+//}
 
