@@ -1,0 +1,5 @@
+# Test des exceptions
+#########################
+
+procedure pincipale()
+ 
