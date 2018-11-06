@@ -205,3 +205,13 @@ private:
     vector<Noeud*> m_variables;
 };
 #endif /* ARBREABSTRAIT_H */
+
+
+class NoeudProc : public Noeud {
+public:
+    
+private:
+
+
+
+}
