@@ -1,0 +1,39 @@
+# Test de toutes les instructions
+#################################
+
+procedure principale()
+
+test1 = 0;
+test2 = 0;
+
+#Test du si 
+#####
+# Résultat attendu
+# test1 = 0
+# test2 = 10
+ 
+si(test1==1)
+    test1 = test2 + 1;
+sinonsi(test1+test2==0)
+    test2=10;
+sinon
+    test1=10;
+finsi
+
+# Test de ecrire et affichage du résultat du si
+#######
+# Résultat attendu
+# " Résultat test du si "
+# " Test1 vaut 0 "
+# " Test2 vaut 10 "
+ecrire ( "*****************")
+ecrire ( "Test du si")
+ecrire ( "*****************")
+ecrire ( " Résultat attendu : ")
+ecrire ( " - test1 = 0")
+ecrire ( " - test2 = 10")
+ecrire ( " Résultat du si : ")
+ecrire ( " Test1 vaut " , test1)
+ecrire ( " Test2 vaut " , test2)
+
+finproc

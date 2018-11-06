@@ -40,9 +40,12 @@
       <itemPath>Makefile</itemPath>
       <itemPath>programme.txt</itemPath>
       <itemPath>testEcrire.txt</itemPath>
+      <itemPath>testGlobal.txt</itemPath>
       <itemPath>testInstTantQue.txt</itemPath>
       <itemPath>testLire.txt</itemPath>
+      <itemPath>testSi.txt</itemPath>
     </logicalFolder>
+    <itemPath>testDemo.txt</itemPath>
     <itemPath>testPour.txt</itemPath>
     <itemPath>testRepeter.txt</itemPath>
   </logicalFolder>
@@ -91,6 +94,8 @@
       <item path="../../M3105/tp5/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../../M3105/tp5/motsCles.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="testDemo.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="testPour.txt" ex="false" tool="3" flavor2="0">
       </item>
@@ -147,6 +152,8 @@
       <item path="../../M3105/tp5/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../../M3105/tp5/motsCles.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="testDemo.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="testPour.txt" ex="false" tool="3" flavor2="0">
       </item>

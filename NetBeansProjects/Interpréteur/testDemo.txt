@@ -1,0 +1,21 @@
+procedure principale()
+    ecrire("entrer un nombre entre 1 et 100")
+    repeter
+        lire(nombre)
+    jusqua( nombre >= 1 et nombre <= 100)
+    trouve = 0; 
+    nbcoups = 0;
+    tantque(non trouve)
+        ecrire("trouver le nombre  : ")
+        lire(i)
+        si(i == nombre)
+            trouve = 1;
+        sinonsi(i > nombre)
+            ecrire("plus petit")
+        sinon
+            ecrire("plus grand")
+        finsi
+        nbcoups = nbcoups + 1;
+    fintantque
+    ecrire("nombre de coup : ", nbcoups)
+finproc
