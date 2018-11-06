@@ -36,8 +36,14 @@ private:
     Noeud* seqInst(); //     <seqInst> ::= <inst> { <inst> }
     Noeud* inst(); //        <inst> ::= <affectation> ; | <instSi>
     Noeud* affectation(); // <affectation> ::= <variable> = <expression> 
-    Noeud* expression(); //  <expression> ::= <facteur> { <opBinaire> <facteur> }
-    Noeud* facteur(); //     <facteur> ::= <entier>  |  <variable>  |  - <facteur>  | non <facteur> | ( <expression> )
+    
+    Noeud* expression(); //  <expression> ::= <terme>  { + <terme>  | - <terme> }
+    Noeud* terme(); // <terme> ::= <facteur> { * <facteur> | / <facteur }
+    Noeud* facteur(); // <facteur>  ::= <entier> | <variable> | - <expbool> | ( <expbool> )
+    Noeud* expBool(); // <expbool> ::= <relationET> { ou <relationEt> }
+    Noeud* relationEt(); // <relationET> ::= <relation> { et <relation> }
+    Noeud* relation(); // <relation> ::= <expression> { <opRel> <expression> }
+    Symbole opRel(); // <opRel> ::= == | != | < | <= | > | >=
     //   <opBinaire> ::= + | - | *  | / | < | > | <= | >= | == | != | et | ou
     Noeud* instSi(); //      <instSi> ::= si ( <expression> ) <seqInst> finsi
     Noeud* instSiRiche(); //<instSiRiche> ::= si(<expression>)<seqInst> {sinon si(<expression>)<seqInst> }[sinon<seqInst>]finsi
