@@ -90,12 +90,21 @@ Noeud* Interpreteur::inst() {
         return instTantQue();
     else if (m_lecteur.getSymbole() == "pour")
         return instPour();
-    else if (m_lecteur.getSymbole() == "repeter")
-        return instRepeter();
-    else if (m_lecteur.getSymbole() == "lire")
-        return instLire();
-    else if (m_lecteur.getSymbole() == "ecrire")
-        return instEcrire();
+    else if (m_lecteur.getSymbole() == "repeter"){
+        Noeud *repeter = instRepeter();
+        testerEtAvancer(";");
+        return repeter;
+    }        
+    else if (m_lecteur.getSymbole() == "lire"){
+        Noeud *lire = instLire();
+        testerEtAvancer(";");
+        return lire;
+    }        
+    else if (m_lecteur.getSymbole() == "ecrire"){
+        Noeud *ecrire = instEcrire();
+        testerEtAvancer(";");       
+        return ecrire;
+    }        
         // Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
     else erreur("Instruction incorrecte");
 
@@ -117,45 +126,104 @@ Noeud* Interpreteur::affectation() {
 }
 
 Noeud* Interpreteur::expression() {
-    // <expression> ::= <facteur> { <opBinaire> <facteur> }
-    //  <opBinaire> ::= + | - | *  | / | < | > | <= | >= | == | != | et | ou
+    // <expression> ::= <terme>  { + <terme>  | - <terme> }
+    Noeud* term = terme();
+    while (m_lecteur.getSymbole() == "+" || m_lecteur.getSymbole() == "-") {
+        Symbole operateur = m_lecteur.getSymbole(); // On mémorise le symbole de l'opérateur
+        m_lecteur.avancer();
+        Noeud* termeDroit = terme(); // On mémorise l'opérande droit
+        term = new NoeudOperateurBinaire(operateur, term, termeDroit); // Et on construuit un noeud opérateur binaire
+    }
+    return term; // On renvoie terme qui pointe sur la racine de l'expression
+}
+
+Noeud* Interpreteur::terme() {
+   // <terme> ::= <facteur> { * <facteur> | / <facteur }
     Noeud* fact = facteur();
-    while (m_lecteur.getSymbole() == "+" || m_lecteur.getSymbole() == "-" ||
-            m_lecteur.getSymbole() == "*" || m_lecteur.getSymbole() == "/" ||
-            m_lecteur.getSymbole() == "<" || m_lecteur.getSymbole() == "<=" ||
-            m_lecteur.getSymbole() == ">" || m_lecteur.getSymbole() == ">=" ||
-            m_lecteur.getSymbole() == "==" || m_lecteur.getSymbole() == "!=" ||
-            m_lecteur.getSymbole() == "et" || m_lecteur.getSymbole() == "ou") {
+    while (m_lecteur.getSymbole() == "*" || m_lecteur.getSymbole() == "/"){        
         Symbole operateur = m_lecteur.getSymbole(); // On mémorise le symbole de l'opérateur
         m_lecteur.avancer();
         Noeud* factDroit = facteur(); // On mémorise l'opérande droit
         fact = new NoeudOperateurBinaire(operateur, fact, factDroit); // Et on construuit un noeud opérateur binaire
-    }
-    return fact; // On renvoie fact qui pointe sur la racine de l'expression
-}
-
-Noeud* Interpreteur::facteur() {
-    // <facteur> ::= <entier> | <variable> | - <facteur> | non <facteur> | ( <expression> )
-    Noeud* fact = nullptr;
-    if (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "<ENTIER>") {
-        fact = m_table.chercheAjoute(m_lecteur.getSymbole()); // on ajoute la variable ou l'entier à la table
-        m_lecteur.avancer();
-    } else if (m_lecteur.getSymbole() == "-") { // - <facteur>
-        m_lecteur.avancer();
-        // on représente le moins unaire (- facteur) par une soustraction binaire (0 - facteur)
-        fact = new NoeudOperateurBinaire(Symbole("-"), m_table.chercheAjoute(Symbole("0")), facteur());
-    } else if (m_lecteur.getSymbole() == "non") { // non <facteur>
-        m_lecteur.avancer();
-        // on représente le moins unaire (- facteur) par une soustractin binaire (0 - facteur)
-        fact = new NoeudOperateurBinaire(Symbole("non"), facteur(), nullptr);
-    } else if (m_lecteur.getSymbole() == "(") { // expression parenthésée
-        m_lecteur.avancer();
-        fact = expression();
-        testerEtAvancer(")");
-    } else
-        erreur("Facteur incorrect");
+    }  
     return fact;
 }
+
+
+Noeud* Interpreteur::facteur() {
+    // <facteur> ::= <entier> | <variable> | - <expBool> | non <expBool> | ( <expBool>  )
+    Noeud* exprBool = nullptr;
+    if (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "<ENTIER>") {
+        exprBool = m_table.chercheAjoute(m_lecteur.getSymbole()); // on ajoute la variable ou l'entier à la table
+        m_lecteur.avancer();
+    } else if (m_lecteur.getSymbole() == "-") { // - <expBool>
+        m_lecteur.avancer();
+        // on représente le moins unaire (- expBool) par une soustraction binaire (0 - expBool)
+        exprBool = new NoeudOperateurBinaire(Symbole("-"), m_table.chercheAjoute(Symbole("0")), expBool());
+    } else if (m_lecteur.getSymbole() == "non") { // non <expBool>
+        m_lecteur.avancer();
+        // on représente le moins unaire (- expBool) par une soustractin binaire (0 - expBool)
+        exprBool = new NoeudOperateurBinaire(Symbole("non"), expBool(), nullptr);
+    } else if (m_lecteur.getSymbole() == "(") { // expression parenthésée
+        m_lecteur.avancer();
+        exprBool = expression();
+        testerEtAvancer(")");
+    } else
+        erreur("Expression booléenne incorrect");
+    return exprBool;
+}
+
+Noeud* Interpreteur::expBool() {
+    // <expbool> ::= <relationET> { ou <relationEt> }
+    Noeud* relEt = relationEt();
+    while(m_lecteur.getSymbole() == "ou"){
+        Symbole operateur = m_lecteur.getSymbole(); // On mémorise le symbole de l'opérateur
+        m_lecteur.avancer();
+        Noeud* relEtDroit = relationEt(); // On mémorise l'opérande droit
+        relEt = new NoeudOperateurBinaire(operateur, relEt, relEtDroit); // Et on construuit un noeud opérateur binaire
+    }
+    return relEt;
+}
+
+Noeud* Interpreteur::relationEt() {
+    // <relationET> ::= <relation> { et <relation> }
+    Noeud* rel = relation();
+    while(m_lecteur.getSymbole() == "et") {
+        Symbole operateur = m_lecteur.getSymbole(); // On mémorise le symbole de l'opérateur
+        m_lecteur.avancer();
+        Noeud* relDroit = relation(); // On mémorise l'opérande droit
+        rel = new NoeudOperateurBinaire(operateur, rel, relDroit); // Et on construuit un noeud opérateur binaire
+    }
+    return rel;
+}
+
+Noeud* Interpreteur::relation() {
+    // <relation> ::= <expression> { <opRel> <expression> }
+    Noeud* expr = expression();
+    while(m_lecteur.getSymbole() == "==" || m_lecteur.getSymbole() == "!=" ||
+            m_lecteur.getSymbole() == "<" || m_lecteur.getSymbole() == "<=" ||
+            m_lecteur.getSymbole() == ">" || m_lecteur.getSymbole() == ">="){
+        Symbole op = opRel();
+        Noeud* exprDroit = expression(); // On mémorise l'opérande droit
+        expr = new NoeudOperateurBinaire(op, expr,exprDroit); // Et on construuit un noeud opérateur binaire
+    }
+    return expr;
+}
+
+Symbole Interpreteur::opRel() {
+        if (m_lecteur.getSymbole() == "==" || m_lecteur.getSymbole() == "!=" ||
+                m_lecteur.getSymbole() == "<" || m_lecteur.getSymbole() == "<=" ||
+                m_lecteur.getSymbole() == ">" || m_lecteur.getSymbole() == ">=" ){
+        Symbole operateur = m_lecteur.getSymbole();
+        m_lecteur.avancer();
+        return operateur;
+    } else {
+        erreur("opérateur incorrect");
+    }
+}
+
+
+
 
 //Noeud* Interpreteur::instSi() {
 //  // <instSi> ::= si ( <expression> ) <seqInst> finsi

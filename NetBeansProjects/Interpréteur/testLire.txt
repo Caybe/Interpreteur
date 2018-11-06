@@ -3,5 +3,5 @@
 procedure principale()
 k = 10;
 x = 2;
-lire(k,y)
+lire(k,y);
 finproc

@@ -7,7 +7,7 @@ j=0;
 repeter
 i = i - 1;
 j = 4;
-jusqua(i < j)
+jusqua(i < j);
 
 
 finproc

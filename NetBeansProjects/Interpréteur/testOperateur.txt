@@ -1,0 +1,11 @@
+# Test de la priorité des opérateurs
+####################################
+# Résultat attendu :
+# i = 26 (et non i = 36 sans priorité des opérateurs) 
+
+
+procedure principale()
+
+i = 2 + 4 * 6;
+ 
+finproc
