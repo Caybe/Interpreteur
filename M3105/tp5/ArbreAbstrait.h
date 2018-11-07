@@ -11,7 +11,7 @@ using namespace std;
 #include <typeinfo>
 #include "Symbole.h"
 #include "Exceptions.h"
-#include "TableSymboles.h"
+
 
 ////////////////////////////////////////////////////////////////////////////////
 

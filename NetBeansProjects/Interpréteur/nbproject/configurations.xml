@@ -28,30 +28,10 @@
       <itemPath>../../M3105/tp5/TableSymboles.cpp</itemPath>
       <itemPath>../../M3105/tp5/main.cpp</itemPath>
     </logicalFolder>
-    <logicalFolder name="f1" displayName="Tests" projectFiles="true">
-      <itemPath>Tests/testDemo.txt</itemPath>
-      <itemPath>Tests/testEcrire.txt</itemPath>
-      <itemPath>Tests/testException.txt</itemPath>
-      <itemPath>Tests/testGlobal.txt</itemPath>
-      <itemPath>Tests/testInstTantQue.txt</itemPath>
-      <itemPath>Tests/testLire.txt</itemPath>
-      <itemPath>Tests/testOperateur.txt</itemPath>
-      <itemPath>Tests/testPour.txt</itemPath>
-      <itemPath>Tests/testRepeter.txt</itemPath>
-      <itemPath>Tests/testSi.txt</itemPath>
-    </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
                    projectFiles="false"
                    kind="TEST_LOGICAL_FOLDER">
-      <logicalFolder name="f1"
-                     displayName="testTantQue"
-                     projectFiles="true"
-                     kind="TEST">
-        <itemPath>../../M3105/tp5/tests/TestTantQue.cpp</itemPath>
-        <itemPath>../../M3105/tp5/tests/TestTantQue.h</itemPath>
-        <itemPath>../../M3105/tp5/tests/newtestrunner2.cpp</itemPath>
-      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -64,8 +44,10 @@
       <itemPath>testInstTantQue.txt</itemPath>
       <itemPath>testLire.txt</itemPath>
       <itemPath>testSi.txt</itemPath>
-      <itemPath>traduitencpp.cpp</itemPath>
     </logicalFolder>
+    <itemPath>testDemo.txt</itemPath>
+    <itemPath>testPour.txt</itemPath>
+    <itemPath>testRepeter.txt</itemPath>
   </logicalFolder>
   <sourceRootList>
     <Elem>../../M3105/tp5</Elem>
@@ -113,25 +95,11 @@
       </item>
       <item path="../../M3105/tp5/motsCles.txt" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Tests/testDemo.txt" ex="false" tool="3" flavor2="0">
+      <item path="testDemo.txt" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Tests/testEcrire.txt" ex="false" tool="3" flavor2="0">
+      <item path="testPour.txt" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Tests/testException.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Tests/testGlobal.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Tests/testInstTantQue.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Tests/testLire.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Tests/testOperateur.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Tests/testPour.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Tests/testRepeter.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Tests/testSi.txt" ex="false" tool="3" flavor2="0">
+      <item path="testRepeter.txt" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -185,26 +153,13 @@
       </item>
       <item path="../../M3105/tp5/motsCles.txt" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Tests/testDemo.txt" ex="false" tool="3" flavor2="0">
+      <item path="testDemo.txt" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Tests/testEcrire.txt" ex="false" tool="3" flavor2="0">
+      <item path="testPour.txt" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Tests/testException.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Tests/testGlobal.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Tests/testInstTantQue.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Tests/testLire.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Tests/testOperateur.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Tests/testPour.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Tests/testRepeter.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Tests/testSi.txt" ex="false" tool="3" flavor2="0">
+      <item path="testRepeter.txt" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>
 </configurationDescriptor>
+
