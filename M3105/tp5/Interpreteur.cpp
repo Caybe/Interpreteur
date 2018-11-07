@@ -386,21 +386,19 @@ void Interpreteur::traduitEncpp(ostream & cout, unsigned int indentation) const 
 }
 
 Noeud* Interpreteur::instSelon() {
+    cout << "TYRUTYFF";
     NoeudInstSelon* noeud = new NoeudInstSelon();
     testerEtAvancer("selon");
     testerEtAvancer("(");
-    testerEtAvancer(",");
-    try {
-        tester("<VARIABLE>");
-    } catch (const SyntaxeException& e) {
-        cerr << e.what() << endl;
-        nbErreurs++;
-    }
+cout << "TYRUTYFF";
     Noeud* var = m_table.chercheAjoute(m_lecteur.getSymbole());
     noeud->ajouterVar(var);
     m_lecteur.avancer();
+    
+    testerEtAvancer(")");
     while (m_lecteur.getSymbole() == "cas") {
         testerEtAvancer("cas");
+        cout << "TYRUTYFF";
         try {
             tester("<ENTIER>");
         } catch (const SyntaxeException& e) {
@@ -408,6 +406,7 @@ Noeud* Interpreteur::instSelon() {
             nbErreurs++;
         }
         Noeud* cas = m_table.chercheAjoute(m_lecteur.getSymbole());
+        
         noeud->ajouterCas(cas);
         m_lecteur.avancer();
         testerEtAvancer(":");

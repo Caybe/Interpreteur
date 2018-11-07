@@ -39,6 +39,7 @@
       <itemPath>Tests/testOperateur.txt</itemPath>
       <itemPath>Tests/testPour.txt</itemPath>
       <itemPath>Tests/testRepeter.txt</itemPath>
+      <itemPath>Tests/testSelon.txt</itemPath>
       <itemPath>Tests/testSi.txt</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -121,6 +122,8 @@
       </item>
       <item path="Tests/testRepeter.txt" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Tests/testSelon.txt" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Tests/testSi.txt" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
@@ -194,6 +197,8 @@
       <item path="Tests/testPour.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/testRepeter.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/testSelon.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/testSi.txt" ex="false" tool="3" flavor2="0">
       </item>

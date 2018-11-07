@@ -1,0 +1,20 @@
+# Test du selon
+############
+
+
+procedure principale()
+    a = 0;
+    
+
+selon (a)
+cas 1 :
+    ecrire("un");
+cas 2 :
+    ecrire("deux");
+cas 3 :
+    ecrire("trois");
+defaut
+    ecrire("defaut");
+finselon
+
+finproc
