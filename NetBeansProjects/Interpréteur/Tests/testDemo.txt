@@ -1,13 +1,17 @@
 procedure principale()
+
     repeter
         ecrire("Entrez un nombre entre 1 et 100");
         lire(nombre);
     jusqua( nombre >= 1 et nombre <= 100 );
+
     trouve = 0; 
     coups = 0;
+
     pour ( i = 0; i < 20; i = i+1)
         ecrire("");
     finpour
+
     tantque(non trouve)
         ecrire("Entrez un nombre : ");
         lire(i);
