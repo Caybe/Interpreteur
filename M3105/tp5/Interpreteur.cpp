@@ -411,7 +411,8 @@ Noeud* Interpreteur::instSelon() {
         testerEtAvancer(":");
         noeud->ajouterSeq(seqInst());
     }
-    testerEtAvancer("defaut :");
+    testerEtAvancer("defaut");
+    testerEtAvancer(":");
         noeud->ajouterSeqDef(seqInst());
         testerEtAvancer("finselon");
     return noeud;

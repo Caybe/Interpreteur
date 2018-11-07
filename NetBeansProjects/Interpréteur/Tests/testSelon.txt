@@ -3,8 +3,7 @@
 
 
 procedure principale()
-    a = 0;
-    
+    a = 2;
 
 selon (a)
 cas 1 :
@@ -13,7 +12,7 @@ cas 2 :
     ecrire("deux");
 cas 3 :
     ecrire("trois");
-defaut
+defaut :
     ecrire("defaut");
 finselon
 

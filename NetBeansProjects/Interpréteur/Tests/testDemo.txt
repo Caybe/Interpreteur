@@ -1,6 +1,6 @@
 procedure principale()
-    ecrire("Entrez un nombre entre 1 et 100");
     repeter
+        ecrire("Entrez un nombre entre 1 et 100");
         lire(nombre);
     jusqua( nombre >= 1 et nombre <= 100 );
     trouve = 0; 
