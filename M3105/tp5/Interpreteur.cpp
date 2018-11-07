@@ -241,13 +241,13 @@ Noeud* Interpreteur::instSiRiche() {
     NoeudInstSiRiche* noeud = new NoeudInstSiRiche();
     testerEtAvancer("si");
     testerEtAvancer("(");
-    noeud->ajouterCond(expression());
+    noeud->ajouterCond(expBool());
     testerEtAvancer(")");
     noeud->ajouterSeq(seqInst());
     while (m_lecteur.getSymbole() == "sinonsi") {
         testerEtAvancer("sinonsi");
         testerEtAvancer("(");
-        noeud->ajouterCond(expression());
+        noeud->ajouterCond(expBool());
         testerEtAvancer(")");
         noeud->ajouterSeq(seqInst());
     }
@@ -264,7 +264,7 @@ Noeud* Interpreteur::instSiRiche() {
 Noeud* Interpreteur::instTantQue() {
     testerEtAvancer("tantque");
     testerEtAvancer("(");
-    Noeud* condition = expression();
+    Noeud* condition = expBool();
     testerEtAvancer(")");
     Noeud* sequence = seqInst();
     testerEtAvancer("fintantque");
@@ -277,7 +277,7 @@ Noeud * Interpreteur::instRepeter() {
     Noeud* sequence = seqInst();
     testerEtAvancer("jusqua");
     testerEtAvancer("(");
-    Noeud* condition = expression();
+    Noeud* condition = expBool();
     testerEtAvancer(")");
     return new NoeudInstRepeter(condition, sequence);
 }
@@ -297,7 +297,7 @@ Noeud* Interpreteur::instPour() {
 
     testerEtAvancer(";");
 
-    noeud->setCondition(expression());
+    noeud->setCondition(expBool());
 
     testerEtAvancer(";");
 
@@ -332,7 +332,7 @@ Noeud* Interpreteur::instEcrire() {
             testerEtAvancer("<CHAINE>");
 
         } else {
-            Noeud* instru = expression();
+            Noeud* instru = expBool();
             noeud->ajouterInstruction(instru);
         }
         premierPassage = false;
