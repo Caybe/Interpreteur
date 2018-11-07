@@ -2,7 +2,7 @@ procedure principale()
     ecrire("entrer un nombre entre 1 et 100");
     repeter
         lire(nombre);
-    jusqua( nombre >= 1 et nombre <= 100 )
+    jusqua( nombre >= 1 et nombre <= 100 );
     trouve = 0; 
     nbcoups = 0;
     tantque(non trouve)

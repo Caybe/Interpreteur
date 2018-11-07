@@ -51,6 +51,7 @@
                    projectFiles="false"
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
+      <itemPath>traduitencpp.cpp</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
