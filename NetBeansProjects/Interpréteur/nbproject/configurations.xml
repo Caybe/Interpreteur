@@ -33,7 +33,6 @@
       <itemPath>Tests/testDemo.txt</itemPath>
       <itemPath>Tests/testEcrire.txt</itemPath>
       <itemPath>Tests/testException.txt</itemPath>
-      <itemPath>Tests/testGlobal.txt</itemPath>
       <itemPath>Tests/testInstTantQue.txt</itemPath>
       <itemPath>Tests/testLire.txt</itemPath>
       <itemPath>Tests/testOperateur.txt</itemPath>
@@ -110,8 +109,6 @@
       </item>
       <item path="Tests/testException.txt" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Tests/testGlobal.txt" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="Tests/testInstTantQue.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/testLire.txt" ex="false" tool="3" flavor2="0">
@@ -185,8 +182,6 @@
       <item path="Tests/testEcrire.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/testException.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Tests/testGlobal.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/testInstTantQue.txt" ex="false" tool="3" flavor2="0">
       </item>

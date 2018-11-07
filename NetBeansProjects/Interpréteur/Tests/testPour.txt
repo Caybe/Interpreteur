@@ -1,12 +1,44 @@
-# Fichier de test
-# Les lignes de commentaires commencent par #
+# Test pour
+################
+# Voir l'exécution de l'arbre
+
 procedure principale()
+
+ecrire("Tes du pour");
+ecrire("***********");
+ecrire("");
+ecrire("Premier type de pour (avec trois paramètres) :");
+
+ecrire("    n = 1;");
+ecrire("    j=15;");
+ecrire("");
+ecrire("    pour(i = 0; i < j; i = i + 1)");
+ecrire("        n = n + 1;");
+ecrire("    finpour");
+ecrire(" Résultat attendu :");
+ecrire(" j = 15, n = 16 et i = 15");
+
 n = 1;
 j=15;
 
 pour(i = 0; i < j; i = i + 1)
     n = n + 1;
 finpour
+
+ecrire(" Résultat :");
+ecrire(" j = ",j,", n = ",n," et i = ",i);
+
+ecrire("");
+ecrire("Second type de pour (avec i déclaré au préalable) :");
+ecrire("    n = 1;");
+ecrire("    j = 15;");
+ecrire("    i = 0;");
+
+ecrire("    pour(; i < j; i = i + 1)");
+ecrire("        n = n + 1;");
+ecrire("    finpour");
+ecrire(" Résultat attendu :");
+ecrire(" j = 15, n = 16 et i = 15");
 
 n = 1;
 j=15;
@@ -16,10 +48,26 @@ pour(; i < j; i = i + 1)
     n = n + 1;
 finpour
 
+ecrire(" Résultat :");
+ecrire(" j = ",j,", n = ",n," et i = ",i);
+
+ecrire("");
+ecrire("Troisième type de pour (sans incrémentation) :");
+ecrire("    i = 20");
+ecrire("    pour(n = 0; n < j;)");
+ecrire("        n = n + 1;");
+ecrire("    finpour");
+ecrire(" Résultat attendu :");
+ecrire(" j = 15, n = 16 et i = 20");
+
+i = 20;
+
 pour(n = 0; n < j;)
     n = n + 1;
 finpour
 
+ecrire(" Résultat :");
+ecrire(" j = ",j,", n = ",n," et i = ",i);
 
 finproc
 
