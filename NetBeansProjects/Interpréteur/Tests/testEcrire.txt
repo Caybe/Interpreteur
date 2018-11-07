@@ -1,5 +1,19 @@
-#test de ecrire
+#Test de ecrire
+################
+# Voir l'exécution de l'arbre
+
 procedure principale()
+
+ecrire("Test de ecrire");
+ecrire("************");
+ecrire("");
+ecrire(" On déclare deux variables :");
+ecrire("    k = 10 et x = 2");
+ecrire(" On fait un ecrire et on vérifie que le programme fait le calcul k+x dans le ecrire et que la concataénation se fait correctement");
+ecrire(" Résultat attendu");
+ecrire(" Bonjour 10+2 = 12 !");
+ecrire("Résultat :");
+
 k = 10;
 x = 2;
 ecrire("Bonjour 10+2 = ",k+x, " !");

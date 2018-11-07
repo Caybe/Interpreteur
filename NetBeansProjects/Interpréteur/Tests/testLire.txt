@@ -1,7 +1,20 @@
-#test lire
-#
+#Test lire
+###########
+#Voir l'exécution de l'arbre
 procedure principale()
+
+ecrire("Test de lire : ");
+ecrire("*************");
+ecrire("");
+ecrire(" On déclare deux variables k = 10 et l = 10");
+ecrire(" Après le test, les deux variables doivent avoir été écraser avec les valeurs saisie");
+ecrire("");
+ecrire(" Saisir deux valeur : ");
 k = 10;
-x = 2;
-lire(k,y);
+l = 10;
+lire(k,l);
+ecrire("");
+ecrire(" Vérification de votre saisie :");
+ecrire(" k = ",k," et l = ", l);
+
 finproc

@@ -1,33 +1,75 @@
 # Test de la priorité des opérateurs
 ####################################
+# Voir l'éxecution de l'arbre
 
 procedure principale()
 
 
 ecrire("Test de la priorité des opérateurs");
-ecrire("***********************************");
+ecrire("*********************************");
 ecrire(" ");
-ecrire("Priorité de la multiplication :");
-ecrire("i = 2 + 4 * 6");
+
+# Priorité de la multiplication
+
+ecrire("* Priorité de la multiplication :");
+ecrire("    i = 2 + 4 * 6");
 ecrire(" Résultat attendu : ");
-ecrire("i = 26 (et non i = 36 sans priorité des opérateurs) ");
+ecrire("    i = 26 (et non i = 36 sans priorité des opérateurs) ");
 ecrire(" Résultat : ");
 i = 2 + 4 * 6;
-ecrire(" i= ", i);
+ecrire("    i= ", i);
+
+# Priorité des parenthèses
 
 ecrire("");
-ecrire("Priorité des parenthèses :");
-ecrire("j = (2 + 4) * 6");
+ecrire("* Priorité des parenthèses :");
+ecrire("    j = (2 + 4) * 6");
 ecrire(" Résultat attendu : ");
-ecrire("j = 36 (et non i = 26 sans priorité des opérateurs) ");
+ecrire("    j = 36 (et non i = 26 sans priorité des opérateurs) ");
 ecrire(" Résultat : ");
 j = (2+4) * 6;
-ecrire(" j= ", j);
+ecrire("    j= ", j);
 
-if( j > 30 et i < 30)
+# Test des opérateurs '<' , '>' et 'et'
+
+si( j > 30 et i < 30)
     k = 1;
-else
+sinon
     k = 0;
 finsi
+
+
+
+ecrire("");
+ecrire("* Test des opérateurs < , > , et");
+ecrire(" si( j > 30 et i < 30) ");
+ecrire("   k = 1");
+ecrire(" sinon");
+ecrire("   k = 0");
+ecrire(" finsi");
+ecrire("Résultat attendu :");
+ecrire("    k = 1 ");
+ecrire("Résultat : ");
+ecrire("    k = ", k);
+
+# Test des opérateurs ou , <= , >=
+
+si( j > 30 et i < 30)
+    k = 1;
+sinon
+    k = 0;
+finsi
+
+ecrire("");
+ecrire("* Test des opérateurs ou , <= , >=");
+ecrire(" si( j >= 37 ou i <= 26) ");
+ecrire("   k = 1");
+ecrire(" sinon");
+ecrire("   k = 0");
+ecrire(" finsi");
+ecrire("Résultat attendu :");
+ecrire("    k = 1 ");
+ecrire("Résultat : ");
+ecrire("    k = ", k);
 
 finproc

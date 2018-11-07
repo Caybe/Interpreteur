@@ -1,10 +1,17 @@
-#test tant que
+#Test tant que
 ##############
-#Résultat attendu :
-# i = 10
-# test = 20
+#Voir exécution de l'arbre
 
 procedure principale()
+
+ecrire ("Test du tantque");
+ecrire ("*************");
+ecrire("");
+ecrire("On déclare deux variables i=0 et test=10");
+ecrire("On souhaite que tantque i<10, i=i+1 et test=test+1");
+ecrire("Résultat attendu :");
+ecrire("    i = 10 et test = 10");
+
 i = 0;
 test = 10;
 
@@ -12,5 +19,8 @@ tantque (i<10)
 i = i+1;
 test = test+1;
 fintantque
+
+ecrire("Résultat : ");
+ecrire("    i = ",i, " et test = ",test);
 
 finproc
