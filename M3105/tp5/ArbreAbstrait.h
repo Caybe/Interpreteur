@@ -11,6 +11,7 @@ using namespace std;
 #include <typeinfo>
 #include "Symbole.h"
 #include "Exceptions.h"
+#include "TableSymboles.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -126,7 +127,7 @@ private:
 class NoeudInstRepeter : public Noeud {
 public:
     NoeudInstRepeter(Noeud* condition, Noeud* sequence);
-    
+
     ~NoeudInstRepeter() {
     }
     int executer();
@@ -163,7 +164,7 @@ public:
     ~NoeudInstPour() {
     }
     int executer();
-    
+
     inline void setSequence(Noeud * seq) {
         m_sequence = seq;
     }
@@ -206,12 +207,19 @@ private:
 };
 #endif /* ARBREABSTRAIT_H */
 
-
-class NoeudProc : public Noeud {
-public:
-    
-private:
-
-
-
-}
+//class NoeudProc : public Noeud {
+//public:
+//
+//    NoeudInstLire() {
+//    }
+//    inline void ajouterSeq(NoeudSeqInst* sequence){
+//        m_sequence = sequence;
+//    }
+//    int executer(vector <...);
+//    void traduitEncpp(ostream & cout, unsigned int indentation) const;
+//    
+//private:
+//    TableSymboles tableSym;
+//    NoeudSeqInst* m_sequence;
+//
+//}
