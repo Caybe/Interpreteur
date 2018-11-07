@@ -1,5 +1,5 @@
 procedure principale()
-    ecrire("entrer un nombre entre 1 et 100");
+    ecrire("Entrez un nombre entre 1 et 100");
     repeter
         lire(nombre);
     jusqua( nombre >= 1 et nombre <= 100 );
@@ -9,7 +9,7 @@ procedure principale()
         ecrire("");
     finpour
     tantque(non trouve)
-        ecrire(" trouver le nombre  : ");
+        ecrire("Entrez un nombre : ");
         lire(i);
         si(i == nombre)
             trouve = 1;
@@ -21,5 +21,5 @@ procedure principale()
         coups = coups + 1;
     fintantque
     
-    ecrire("nombre de coup : ", 10 - coups);
+    ecrire("Trouvé ! nombre de coup : ", coups);
 finproc

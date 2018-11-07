@@ -45,6 +45,14 @@
                    displayName="Test Files"
                    projectFiles="false"
                    kind="TEST_LOGICAL_FOLDER">
+      <logicalFolder name="f1"
+                     displayName="New CppUnit Test"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>../../M3105/tp5/tests/newtestclass2.cpp</itemPath>
+        <itemPath>../../M3105/tp5/tests/newtestclass2.h</itemPath>
+        <itemPath>../../M3105/tp5/tests/newtestrunner4.cpp</itemPath>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -101,6 +109,21 @@
       </item>
       <item path="../../M3105/tp5/motsCles.txt" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="../../M3105/tp5/tests/newtestclass2.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../M3105/tp5/tests/newtestclass2.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../M3105/tp5/tests/newtestrunner4.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
       <item path="Tests/programme.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/testDemo.txt" ex="false" tool="3" flavor2="0">
@@ -123,6 +146,20 @@
       </item>
       <item path="Tests/testSi.txt" ex="false" tool="3" flavor2="0">
       </item>
+      <folder path="TestFiles/f1">
+        <cTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </cTool>
+        <ccTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f1</output>
+          <linkerLibItems>
+            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
     </conf>
     <conf name="Release" type="1">
       <toolsSet>
@@ -175,6 +212,21 @@
       </item>
       <item path="../../M3105/tp5/motsCles.txt" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="../../M3105/tp5/tests/newtestclass2.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../M3105/tp5/tests/newtestclass2.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../M3105/tp5/tests/newtestrunner4.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
       <item path="Tests/programme.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/testDemo.txt" ex="false" tool="3" flavor2="0">
@@ -197,6 +249,20 @@
       </item>
       <item path="Tests/testSi.txt" ex="false" tool="3" flavor2="0">
       </item>
+      <folder path="TestFiles/f1">
+        <cTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </cTool>
+        <ccTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f1</output>
+          <linkerLibItems>
+            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
     </conf>
   </confs>
 </configurationDescriptor>

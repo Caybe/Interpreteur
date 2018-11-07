@@ -24,8 +24,10 @@ void NoeudSeqInst::ajoute(Noeud* instruction) {
 void NoeudSeqInst::traduitEncpp(ostream & cout, unsigned int indentation) const {
     for (unsigned int i = 0; i < m_instructions.size(); i++) {
         m_instructions[i]->traduitEncpp(cout, indentation);
+        if(typeid (*m_instructions[i]) == typeid (NoeudAffectation))
+            cout << ";";
         cout << endl;
-    } // on exécute chaque instruction de la séquence
+    }
 
 }
 
@@ -49,7 +51,6 @@ void NoeudAffectation::traduitEncpp(ostream & cout, unsigned int indentation) co
     m_variable->traduitEncpp(cout, 0);
     cout << " = ";
     m_expression->traduitEncpp(cout, 0);
-    cout << ";";
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -271,12 +272,13 @@ void NoeudInstPour::traduitEncpp(ostream& cout, unsigned int indentation) const 
     if (m_init != nullptr) {
         m_init->traduitEncpp(cout, 0);
     }
+    cout << ";";
     m_condition->traduitEncpp(cout, 0);
     cout << ";";
     if (m_increment != nullptr) {
         m_increment->traduitEncpp(cout, 0);
     }
-    cout << " ) {" << endl;
+    cout << ") {" << endl;
     m_sequence->traduitEncpp(cout, indentation + 1);
     cout << setw(4 * indentation) << "" << "}";
 
@@ -310,7 +312,7 @@ void NoeudInstLire::traduitEncpp(ostream& cout, unsigned int indentation) const 
     cout << ";";
 }
 
-int NoeudInstSelon::executer(){
+int NoeudInstSelon::executer() {
     int var = m_variable->executer();
     bool b = true;
     for (int i = 0; i < m_cas.size() && b; i++) {
@@ -325,6 +327,6 @@ int NoeudInstSelon::executer(){
     return 0;
 }
 
-void NoeudInstSelon::traduitEncpp(ostream & cout, unsigned int indentation) const{
-    
+void NoeudInstSelon::traduitEncpp(ostream & cout, unsigned int indentation) const {
+
 }

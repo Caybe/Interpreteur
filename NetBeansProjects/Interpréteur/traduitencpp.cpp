@@ -7,17 +7,17 @@ int main() {
     int i;
     int nombre;
     int trouve;
-    cout << "entrer un nombre entre 1 et 100" << endl;
+    cout << "Entrez un nombre entre 1 et 100" << endl;
     do {
         cin >> nombre;
     } while (!(nombre >= 1 && nombre <= 100));
     trouve = 0;
     coups = 0;
-    for ( i = 0;i < 20;i = i + 1; ) {
+    for (i = 0; i < 20; i = i + 1) {
         cout << "" << endl;
     }
     while (!trouve) {
-        cout << " trouver le nombre  : " << endl;
+        cout << "Entrez un nombre : " << endl;
         cin >> i;
         if (i == nombre) {
             trouve = 1;
@@ -29,6 +29,6 @@ int main() {
         coups = coups + 1;
     }
 
-    cout << "nombre de coup : " << 10 - coups << endl;
+    cout << "Trouvé ! nombre de coup : " << coups << endl;
     return 0;
 }
