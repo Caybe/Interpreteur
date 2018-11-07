@@ -24,4 +24,10 @@ ecrire(" Résultat : ");
 j = (2+4) * 6;
 ecrire(" j= ", j);
 
+if( j > 30 et i < 30)
+    k = 1;
+else
+    k = 0;
+finsi
+
 finproc
