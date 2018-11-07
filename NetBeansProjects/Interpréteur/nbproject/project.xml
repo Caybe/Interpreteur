@@ -11,6 +11,7 @@
             <make-dep-projects/>
             <sourceRootList>
                 <sourceRootElem>../../M3105/tp5</sourceRootElem>
+                <sourceRootElem>Tests</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>
