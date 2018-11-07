@@ -4,9 +4,12 @@ procedure principale()
         lire(nombre);
     jusqua( nombre >= 1 et nombre <= 100 );
     trouve = 0; 
-    nbcoups = 0;
+    coups = 0;
+    pour ( i = 0; i < 20; i = i+1)
+        ecrire("");
+    finpour
     tantque(non trouve)
-        ecrire("trouver le nombre  : ");
+        ecrire(" trouver le nombre  : ");
         lire(i);
         si(i == nombre)
             trouve = 1;
@@ -15,7 +18,8 @@ procedure principale()
         sinon
             ecrire("plus grand");
         finsi
-        nbcoups = nbcoups + 1;
+        coups = coups + 1;
     fintantque
-    ecrire("nombre de coup : ", nbcoups);
+    
+    ecrire("nombre de coup : ", 10 - coups);
 finproc

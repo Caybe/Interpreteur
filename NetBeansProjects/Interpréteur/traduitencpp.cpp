@@ -3,8 +3,8 @@
 using namespace std;
 
 int main() {
+    int coups;
     int i;
-    int nbcoups;
     int nombre;
     int trouve;
     cout << "entrer un nombre entre 1 et 100" << endl;
@@ -12,9 +12,12 @@ int main() {
         cin >> nombre;
     } while (!(nombre >= 1 && nombre <= 100));
     trouve = 0;
-    nbcoups = 0;
+    coups = 0;
+    for ( i = 0;i < 20;i = i + 1; ) {
+        cout << "" << endl;
+    }
     while (!trouve) {
-        cout << "trouver le nombre  : " << endl;
+        cout << " trouver le nombre  : " << endl;
         cin >> i;
         if (i == nombre) {
             trouve = 1;
@@ -23,9 +26,9 @@ int main() {
         } else {
             cout << "plus grand" << endl;
         }
-        nbcoups = nbcoups + 1;
+        coups = coups + 1;
     }
 
-    cout << "nombre de coup : " << nbcoups << endl;
+    cout << "nombre de coup : " << 10 - coups << endl;
     return 0;
 }
