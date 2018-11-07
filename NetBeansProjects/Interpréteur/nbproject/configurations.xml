@@ -28,9 +28,8 @@
       <itemPath>../../M3105/tp5/TableSymboles.cpp</itemPath>
       <itemPath>../../M3105/tp5/main.cpp</itemPath>
     </logicalFolder>
-    <logicalFolder name="f1" displayName="Tests" projectFiles="true" kind="ROOT">
+    <logicalFolder name="f1" displayName="Tests" projectFiles="true">
       <itemPath>Tests/testDemo.txt</itemPath>
-      <itemPath>testEcrire.txt</itemPath>
       <itemPath>Tests/testEcrire.txt</itemPath>
       <itemPath>Tests/testException.txt</itemPath>
       <itemPath>Tests/testGlobal.txt</itemPath>
@@ -67,10 +66,6 @@
       <itemPath>testSi.txt</itemPath>
       <itemPath>traduitencpp.cpp</itemPath>
     </logicalFolder>
-    <itemPath>testDemo.txt</itemPath>
-    <itemPath>testPour.txt</itemPath>
-    <itemPath>testRepeter.txt</itemPath>
-    <itemPath>testTantQue1</itemPath>
   </logicalFolder>
   <sourceRootList>
     <Elem>../../M3105/tp5</Elem>
@@ -137,8 +132,6 @@
       <item path="Tests/testRepeter.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/testSi.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="testEcrire.txt" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -211,8 +204,6 @@
       <item path="Tests/testRepeter.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/testSi.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="testEcrire.txt" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

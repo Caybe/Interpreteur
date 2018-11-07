@@ -48,7 +48,7 @@ TESTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tests
 
 # Test Files
 TESTFILES= \
-	${TESTDIR}/TestFiles/f1
+	${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/interpr_teur
 
 # Test Object Files
 TESTOBJECTFILES= \
@@ -121,21 +121,9 @@ ${OBJECTDIR}/_ext/414263ba/main.o: ../../M3105/tp5/main.cpp
 .build-tests-conf: .build-tests-subprojects .build-conf ${TESTFILES}
 .build-tests-subprojects:
 
-${TESTDIR}/TestFiles/f1: ${TESTDIR}/_ext/96b9438c/TestTantQue.o ${TESTDIR}/_ext/96b9438c/newtestrunner2.o ${OBJECTFILES:%.o=%_nomain.o}
-	${MKDIR} -p ${TESTDIR}/TestFiles
-	${LINK.cc} -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS}   `cppunit-config --libs`   
-
-
-${TESTDIR}/_ext/96b9438c/TestTantQue.o: ../../M3105/tp5/tests/TestTantQue.cpp 
-	${MKDIR} -p ${TESTDIR}/_ext/96b9438c
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/_ext/96b9438c/TestTantQue.o ../../M3105/tp5/tests/TestTantQue.cpp
-
-
-${TESTDIR}/_ext/96b9438c/newtestrunner2.o: ../../M3105/tp5/tests/newtestrunner2.cpp 
-	${MKDIR} -p ${TESTDIR}/_ext/96b9438c
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/_ext/96b9438c/newtestrunner2.o ../../M3105/tp5/tests/newtestrunner2.cpp
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/interpr_teur: ${OBJECTFILES:%.o=%_nomain.o}
+	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/interpr_teur $^ ${LDLIBSOPTIONS}   
 
 
 ${OBJECTDIR}/_ext/414263ba/ArbreAbstrait_nomain.o: ${OBJECTDIR}/_ext/414263ba/ArbreAbstrait.o ../../M3105/tp5/ArbreAbstrait.cpp 
@@ -233,7 +221,7 @@ ${OBJECTDIR}/_ext/414263ba/main_nomain.o: ${OBJECTDIR}/_ext/414263ba/main.o ../.
 .test-conf:
 	@if [ "${TEST}" = "" ]; \
 	then  \
-	    ${TESTDIR}/TestFiles/f1 || true; \
+	    ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/interpr_teur || true; \
 	else  \
 	    ./${TEST} || true; \
 	fi
