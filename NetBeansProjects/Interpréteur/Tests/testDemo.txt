@@ -21,5 +21,5 @@ procedure principale()
         coups = coups + 1;
     fintantque
     
-    ecrire("Trouvé ! nombre de coup : ", coups);
+    ecrire("Trouvé ! nombre de coups : ", coups);
 finproc

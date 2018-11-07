@@ -13,7 +13,7 @@ int main() {
     } while (!(nombre >= 1 && nombre <= 100));
     trouve = 0;
     coups = 0;
-    for (i = 0; i < 20; i = i + 1) {
+    for ( i = 0;i < 20;i = i + 1) {
         cout << "" << endl;
     }
     while (!trouve) {
