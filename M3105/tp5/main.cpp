@@ -11,6 +11,7 @@ int main(int argc, char* argv[]) {
         getline(cin, nomFich);
     } else
         nomFich = argv[1];
+    nomFich = "Tests/"+nomFich;
     ifstream fichier(nomFich.c_str());
     try {
         Interpreteur interpreteur(fichier);
