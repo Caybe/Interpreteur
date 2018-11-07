@@ -1,5 +1,44 @@
+
 # Test des exceptions
 #########################
 
-procedure pincipale()
+#On souhaite vérifier que les exceptions sont levées aux bons endroits et que on continue à interpreter après une exception levée
+#D'autre part on souhaite que l'arbre soit vide
+
+#Cette procedure compte 5 erreurs 
+# On attend les erreurs suivantes : 
+#    - il manque le e de principale :
+#    Ligne 4, Colonne 11 - Erreur de syntaxe - Symbole attendu : principale - Symbole trouvé : principal 
+
+#    - il manque un ; après la première affectation du si : 
+#    Ligne 15, Colonne 1 - Erreur de syntaxe - Symbole attendu : ; - Symbole trouvé : sinon
+
+#    - il manque un ; après la seconde affectation dans le sinon :
+#    Ligne 17, Colonne 1 - Erreur de syntaxe - Symbole attendu : ; - Symbole trouvé : finsi
+
+#    - à cause l'erreur précèdente, le finsi n'a pas été interprété, l'interpréteur ne trouve donc rien 
+#    Ligne 18, Colonne 1 - Erreur de syntaxe - Symbole attendu : finsi - Symbole trouvé 
+
+#    - il manque le finproc à la fin du programme
+#    Ligne 18, Colonne 1 - Erreur de syntaxe - Symbole attendu : finproc - Symbole trouvé : 
+
+#    - nous avons levé 5 erreurs :
+#    Nombres d'erreurs : 5
+
+#Vérifier les erreurs dans le output"
+
+# Programme testé {
+
+procedure principal()
  
+
+j = 1;
+si( j == 1 )
+    j = 10
+sinon
+    j = 20
+finsi
+
+# }
+
+
