@@ -86,15 +86,20 @@ int NoeudOperateurBinaire::executer() {
 
 void NoeudOperateurBinaire::traduitEncpp(ostream & cout, unsigned int indentation) const {
     string sym;
-    if (this->m_operateur == "et") sym = "&&";
-    else if (this->m_operateur == "ou") sym = "||";
-    else if (this->m_operateur == "non") sym = "!";
-    else sym = this->m_operateur.getChaine();
-    cout << setw(4 * indentation) << "";
-    m_operandeGauche->traduitEncpp(cout, 0);
-    cout << " " << sym << " ";
-    m_operandeDroit->traduitEncpp(cout, 0);
+    if (this->m_operateur == "non") {
+        cout << "!";
+        m_operandeGauche->traduitEncpp(cout, 0);
+    } else {
+        if (this->m_operateur == "et") sym = "&&";
+        else if (this->m_operateur == "ou") sym = "||";
+        else sym = this->m_operateur.getChaine();
+        cout << setw(4 * indentation) << "";
+        m_operandeGauche->traduitEncpp(cout, 0);
+        cout << " " << sym << " ";
+        m_operandeDroit->traduitEncpp(cout, 0);
+    }
 }
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudInstSi
@@ -193,9 +198,9 @@ int NoeudInstRepeter::executer() {
 void NoeudInstRepeter::traduitEncpp(ostream& cout, unsigned int indentation) const {
     cout << setw(4 * indentation) << "" << "do {" << endl;
     m_sequence->traduitEncpp(cout, indentation + 1);
-    cout << setw(4 * indentation) << "" << "} while (";
+    cout << setw(4 * indentation) << "" << "} while (!(";
     m_condition->traduitEncpp(cout, 0);
-    cout << ")";
+    cout << "));";
 }
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudInstEcrire
@@ -305,3 +310,21 @@ void NoeudInstLire::traduitEncpp(ostream& cout, unsigned int indentation) const 
     cout << ";";
 }
 
+int NoeudInstSelon::executer(){
+    int var = m_variable->executer();
+    bool b = true;
+    for (int i = 0; i < m_cas.size() && b; i++) {
+        if (m_cas[i]->executer() == var) {
+            m_sequences[i]->executer();
+            b = false;
+        };
+    }
+    if (b) {
+        m_defaut->executer();
+    }
+    return 0;
+}
+
+void NoeudInstSelon::traduitEncpp(ostream & cout, unsigned int indentation) const{
+    
+}

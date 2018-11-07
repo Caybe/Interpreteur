@@ -28,13 +28,13 @@ int main(int argc, char* argv[]) {
         cout << endl << "================ traduction en c++ : " << endl;
 
         if (interpreteur.getArbre() != nullptr) {
-//            ofstream cpp("traduitencpp.cpp", ios::out);
-//            if (cpp)
-//                interpreteur.traduitEncpp(cpp, 0);
-//            else
-//                cerr << "erreur ouverture";
-//            cpp.close();
-            interpreteur.traduitEncpp(cout, 0);
+            ofstream cpp("traduitencpp.cpp", ios::out);
+            if (cpp)
+                interpreteur.traduitEncpp(cpp, 0);
+            else
+                cerr << "erreur ouverture";
+            cpp.close();
+        //    interpreteur.traduitEncpp(cout, 0);
         }
 
     } catch (InterpreteurException & e) {

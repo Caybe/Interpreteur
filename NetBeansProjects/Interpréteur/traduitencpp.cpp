@@ -3,17 +3,32 @@
 using namespace std;
 
 int main() {
+    int coups;
     int i;
-    int j;
-    int n;
-    n = 1;
-    j = 15;
-    for ( i = 0;i < ji = i + 1; ) {
-        n = n + 1;
+    int nombre;
+    int trouve;
+    cout << "entrer un nombre entre 1 et 100" << endl;
+    do {
+        cin >> nombre;
+    } while (!(nombre >= 1 && nombre <= 100));
+    trouve = 0;
+    coups = 0;
+    for ( i = 0;i < 20;i = i + 1; ) {
+        cout << "" << endl;
     }
-    n = 1;
-    j = 15;
-    i = 0;
-    for ( j = 15;i < ji = i + 1; ) {
-        n = n + 1;
+    while (!trouve) {
+        cout << " trouver le nombre  : " << endl;
+        cin >> i;
+        if (i == nombre) {
+            trouve = 1;
+        } else if (i > nombre) {
+            cout << "plus petit" << endl;
+        } else {
+            cout << "plus grand" << endl;
+        }
+        coups = coups + 1;
     }
+
+    cout << "nombre de coup : " << 10 - coups << endl;
+    return 0;
+}

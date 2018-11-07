@@ -205,7 +205,40 @@ public:
 private:
     vector<Noeud*> m_variables;
 };
-#endif /* ARBREABSTRAIT_H */
+
+
+class NoeudInstSelon : public Noeud {
+    // Classe pour représenter un noeud "instruction si"
+    //  et ses 2 fils : la condition du si et la séquence d'instruction associée
+public:
+    NoeudInstSelon(){
+        
+    }
+    // Construit une "instruction si" avec sa condition et sa séquence d'instruction
+
+    ~NoeudInstSelon() {
+    } // A cause du destructeur virtuel de la classe Noeud
+    int executer(); // Exécute l'instruction si : si condition vraie on exécute la séquence
+    inline void ajouterVar(Noeud* var){
+        m_variable = var;
+    }
+    void ajouterCas(Noeud* cas){
+        m_cas.push_back(cas);
+    }
+    void ajouterSeq(Noeud* sequence){
+        m_sequences.push_back(sequence);
+    }
+    inline void ajouterSeqDef(Noeud* sequence){
+        m_defaut = sequence;
+    }
+    void traduitEncpp(ostream & cout, unsigned int indentation) const;
+private:
+    Noeud* m_variable;
+    vector<Noeud*> m_cas;
+    vector<Noeud*> m_sequences;
+    Noeud* m_defaut;
+};
+
 
 //class NoeudProc : public Noeud {
 //public:
@@ -223,3 +256,6 @@ private:
 //    NoeudSeqInst* m_sequence;
 //
 //}
+#endif /* ARBREABSTRAIT_H */
+
+
